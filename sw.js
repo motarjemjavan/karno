@@ -4,7 +4,7 @@ const ASSETS_TO_CACHE = [
   './index.html',
   './manifest.json',
   'https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css',
-  'https://cdn.jsdelivr.net/npm/jalaali-js/dist/jalaali.min.js'
+  'https://cdn.jsdelivr.net/npm/jalaali-js@1.2.6/dist/jalaali.min.js'
 ];
 
 self.addEventListener('install', (event) => {
