@@ -1,0 +1,43 @@
+{
+  "name": "کارنو - دستیار سرویس و نگهداری خودرو",
+  "short_name": "کارنو",
+  "description": "دستیار هوشمند نگهداری خودرو با قابلیت آفلاین",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f172a",
+  "theme_color": "#1e40af",
+  "lang": "fa",
+  "dir": "rtl",
+  "categories": ["utilities", "lifestyle"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM2NjdlZWEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM3NjRiYTIiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgZmlsbD0idXJsKCNnKSIgcng9IjEwMCIvPjxwYXRoIGQ9Ik0xMjggMzA3UTI1NiAyMzAgMzA3IDIzMEw0MDkgMjMwUTQ2MCAyMzAgNDg2IDMwN0w0ODYgMzU4UTQ4NiAzODQgNDYwIDM4NEwxNTQgMzg0UTEyOCAzODQgMTI4IDM1OFoiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjkiLz48Y2lyY2xlIGN4PSIxNzkiIGN5PSIzNTgiIHI9IjMwIiBmaWxsPSIjMzMzIi8+PGNpcmNsZSBjeD0iMzMzIiBjeT0iMzU4IiByPSIzMCIgZmlsbD0iIzMzMyIvPjxyZWN0IHg9IjE3OSIgeT0iMjU2IiB3aWR0aD0iMTU0IiBoZWlnaHQ9Ijc3IiBmaWxsPSIjNGE5MGUyIiBvcGFjaXR5PSIwLjYiIHJ4PSIxMCIvPjwvc3ZnPg==",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxOTIgMTkyIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM2NjdlZWEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM3NjRiYTIiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgZmlsbD0idXJsKCNnKSIgcng9IjQwIi8+PHBhdGggZD0iTTQ4IDExNVE5NiA4NiAxMTUgODZMMTUzIDg2UTE3MiA4NiAxODIgMTE1TDE4MiAxMzRRMTgyIDE0NCAxNzIgMTQ0TDU4IDE0NFE0OCAxNDQgNDggMTM0WiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuOSIvPjxjaXJjbGUgY3g9IjY3IiBjeT0iMTM0IiByPSIxMSIgZmlsbD0iIzMzMyIvPjxjaXJjbGUgY3g9IjEyNSIgY3k9IjEzNCIgcj0iMTEiIGZpbGw9IiMzMzMiLz48cmVjdCB4PSI2NyIgeT0iOTYiIHdpZHRoPSI1OCIgaGVpZ2h0PSIyOSIgZmlsbD0iIzRhOTBlMiIgb3BhY2l0eT0iMC42IiByeD0iNCIvPjwvc3ZnPg==",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "ثبت سرویس جدید",
+      "short_name": "ثبت سرویس",
+      "description": "ثبت سریع سرویس جدید",
+      "url": "./index.html?action=new-service",
+      "icons": [{"src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxOTIgMTkyIj48Y2lyY2xlIGN4PSI5NiIgY3k9Ijk2IiByPSI5NiIgZmlsbD0iIzEwYjk4MSIvPjxwYXRoIGQ9Ik05NiA1NnY4ME01NiA5Nmg4MCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIxMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+", "sizes": "192x192"}]
+    },
+    {
+      "name": "به‌روزرسانی کیلومتر",
+      "short_name": "کیلومتر",
+      "url": "./index.html?action=update-km",
+      "icons": [{"src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxOTIgMTkyIj48Y2lyY2xlIGN4PSI5NiIgY3k9Ijk2IiByPSI5NiIgZmlsbD0iIzNiODJmNiIvPjxwYXRoIGQ9Ik05NiA0OHY0OGwzMiAyNCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIxMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBmaWxsPSJub25lIi8+PC9zdmc+", "sizes": "192x192"}]
+    }
+  ]
+}
