@@ -9,1466 +9,480 @@
 <meta name="apple-mobile-web-app-title" content="کارنو">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="description" content="دستیار هوشمند نگهداری خودرو - آفلاین و بدون نیاز به اینترنت">
-
-<!-- Open Graph -->
 <meta property="og:title" content="کارنو - دستیار سرویس خودرو">
 <meta property="og:description" content="دستیار هوشمند نگهداری خودرو با قابلیت آفلاین">
 <meta property="og:type" content="website">
-
 <title>کارنو | دستیار سرویس خودرو</title>
-
-<!-- مسیرهای نسبی برای GitHub Pages -->
 <link rel="manifest" href="./manifest.json">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><linearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22><stop offset=%220%22 stop-color=%22%23667eea%22/><stop offset=%221%22 stop-color=%22%23764ba2%22/></linearGradient></defs><rect width=%22100%22 height=%22100%22 fill=%22url(%23g)%22 rx=%2220%22/><path d=%22M25 60 Q30 45 40 45 L60 45 Q70 45 75 60 L75 70 Q75 75 70 75 L30 75 Q25 75 25 70 Z%22 fill=%22white%22 opacity=%220.9%22/><circle cx=%2235%22 cy=%2270%22 r=%226%22 fill=%22%23333%22/><circle cx=%2265%22 cy=%2270%22 r=%226%22 fill=%22%23333%22/><rect x=%2235%22 y=%2250%22 width=%2230%22 height=%2215%22 fill=%22%234a90e2%22 opacity=%220.6%22 rx=%222%22/></svg>">
 <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 180 180%22><defs><linearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22><stop offset=%220%22 stop-color=%22%23667eea%22/><stop offset=%221%22 stop-color=%22%23764ba2%22/></linearGradient></defs><rect width=%22180%22 height=%22180%22 fill=%22url(%23g)%22 rx=%2240%22/><path d=%22M45 108 Q54 81 72 81 L108 81 Q126 81 135 108 L135 126 Q135 135 126 135 L54 135 Q45 135 45 126 Z%22 fill=%22white%22 opacity=%220.9%22/><circle cx=%2263%22 cy=%22126%22 r=%2210.8%22 fill=%22%23333%22/><circle cx=%22117%22 cy=%22126%22 r=%2210.8%22 fill=%22%23333%22/><rect x=%2263%22 y=%2290%22 width=%2254%22 height=%2227%22 fill=%22%234a90e2%22 opacity=%220.6%22 rx=%223.6%22/></svg>">
 <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/jalaali-js/dist/jalaali.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/jalaali-js@1.2.6/dist/jalaali.min.js"></script>
 <style>
-:root {
-  --primary: #1e40af;
-  --primary-light: #3b82f6;
-  --primary-dark: #1e3a8a;
-  --success: #10b981;
-  --warning: #f59e0b;
-  --danger: #ef4444;
-  --bg: #f8fafc;
-  --surface: #ffffff;
-  --surface-2: #f1f5f9;
-  --text: #0f172a;
-  --text-muted: #64748b;
-  --border: #e2e8f0;
-  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-lg: 0 10px 25px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.05);
-  --radius: 16px;
-  --radius-sm: 10px;
-  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  --safe-top: env(safe-area-inset-top);
-  --safe-bottom: env(safe-area-inset-bottom);
-}
-
-[data-theme="dark"] {
-  --primary: #3b82f6;
-  --primary-light: #60a5fa;
-  --primary-dark: #2563eb;
-  --bg: #0f172a;
-  --surface: #1e293b;
-  --surface-2: #334155;
-  --text: #f1f5f9;
-  --text-muted: #94a3b8;
-  --border: #334155;
-  --shadow: 0 1px 3px rgba(0,0,0,0.3);
-  --shadow-lg: 0 10px 25px rgba(0,0,0,0.4);
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
-html, body {
-  font-family: 'Vazirmatn', Tahoma, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  transition: background 0.3s, color 0.3s;
-}
-
-button, input, select, textarea { font-family: inherit; }
-button { cursor: pointer; border: none; background: none; color: inherit; }
-
-/* ===== Header ===== */
-.app-header {
-  position: sticky;
-  top: 0;
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: white;
-  padding: calc(var(--safe-top) + 16px) 20px 20px;
-  z-index: 100;
-  box-shadow: var(--shadow-lg);
-}
-.header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-.app-title { font-size: 22px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
-.app-title::before { content: "🚗"; font-size: 24px; }
-.header-actions { display: flex; gap: 8px; }
-.icon-btn {
-  width: 40px; height: 40px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.15);
-  display: flex; align-items: center; justify-content: center;
-  transition: var(--transition);
-  backdrop-filter: blur(10px);
-}
-.icon-btn:active { transform: scale(0.9); background: rgba(255,255,255,0.25); }
-.icon-btn svg { width: 20px; height: 20px; fill: white; }
-
-.car-info {
-  background: rgba(255,255,255,0.12);
-  border-radius: var(--radius-sm);
-  padding: 12px 16px;
-  backdrop-filter: blur(10px);
-  display: flex; justify-content: space-between; align-items: center;
-}
-.car-name { font-size: 14px; opacity: 0.9; }
-.km-display {
-  font-size: 20px; font-weight: 700;
-  display: flex; align-items: baseline; gap: 4px;
-}
-.km-display small { font-size: 12px; opacity: 0.8; font-weight: 400; }
-.km-update-btn {
-  background: white;
-  color: var(--primary);
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  transition: var(--transition);
-}
-.km-update-btn:active { transform: scale(0.95); }
-
-/* ===== Install Banner ===== */
-.install-banner {
-  background: linear-gradient(135deg, #10b981, #059669);
-  color: white;
-  padding: 14px 20px;
-  display: none;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  animation: slideDown 0.4s ease;
-}
-.install-banner.show { display: flex; }
-.install-banner-text { font-size: 14px; font-weight: 500; flex: 1; }
-.install-btn {
-  background: white;
-  color: #059669;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 700;
-  white-space: nowrap;
-}
-.install-dismiss {
-  width: 28px; height: 28px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.2);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px;
-}
-
-/* ===== Main Content ===== */
-.main-content {
-  padding: 16px;
-  padding-bottom: calc(80px + var(--safe-bottom));
-  max-width: 720px;
-  margin: 0 auto;
-}
-
-.page { display: none; animation: fadeIn 0.3s ease; }
-.page.active { display: block; }
-
-@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes slideDown { from { transform: translateY(-100%); } to { transform: translateY(0); } }
-@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-
-/* ===== Stats Grid ===== */
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin-bottom: 20px;
-}
-.stat-card {
-  background: var(--surface);
-  border-radius: var(--radius);
-  padding: 16px;
-  box-shadow: var(--shadow);
-  transition: var(--transition);
-  position: relative;
-  overflow: hidden;
-}
-.stat-card::before {
-  content: '';
-  position: absolute;
-  top: 0; right: 0;
-  width: 4px; height: 100%;
-  background: var(--primary);
-}
-.stat-card.warning::before { background: var(--warning); }
-.stat-card.danger::before { background: var(--danger); }
-.stat-card.success::before { background: var(--success); }
-.stat-icon {
-  width: 36px; height: 36px;
-  border-radius: 10px;
-  background: var(--surface-2);
-  display: flex; align-items: center; justify-content: center;
-  margin-bottom: 10px;
-  font-size: 18px;
-}
-.stat-label { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
-.stat-value { font-size: 20px; font-weight: 700; }
-.stat-value small { font-size: 11px; color: var(--text-muted); font-weight: 400; margin-right: 4px; }
-
-/* ===== Section ===== */
-.section {
-  background: var(--surface);
-  border-radius: var(--radius);
-  padding: 16px;
-  margin-bottom: 16px;
-  box-shadow: var(--shadow);
-}
-.section-header {
-  display: flex; justify-content: space-between; align-items: center;
-  margin-bottom: 14px;
-}
-.section-title { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
-.section-title::before {
-  content: '';
-  width: 4px; height: 18px;
-  background: var(--primary);
-  border-radius: 2px;
-}
-.section-action {
-  color: var(--primary);
-  font-size: 13px;
-  font-weight: 600;
-  padding: 6px 10px;
-  border-radius: 8px;
-  transition: var(--transition);
-}
-.section-action:active { background: var(--surface-2); }
-
-/* ===== Reminder Card ===== */
-.reminder-card {
-  background: var(--surface-2);
-  border-radius: var(--radius-sm);
-  padding: 14px;
-  margin-bottom: 10px;
-  border-right: 4px solid var(--primary);
-  transition: var(--transition);
-  position: relative;
-  overflow: hidden;
-}
-.reminder-card.warning { border-right-color: var(--warning); background: rgba(245, 158, 11, 0.08); }
-.reminder-card.danger { border-right-color: var(--danger); background: rgba(239, 68, 68, 0.08); }
-.reminder-card.success { border-right-color: var(--success); }
-.reminder-title { font-weight: 700; margin-bottom: 6px; font-size: 14px; }
-.reminder-info { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
-.reminder-progress {
-  height: 6px;
-  background: var(--border);
-  border-radius: 3px;
-  overflow: hidden;
-}
-.reminder-progress-bar {
-  height: 100%;
-  background: var(--primary);
-  border-radius: 3px;
-  transition: width 0.5s ease;
-}
-.reminder-card.warning .reminder-progress-bar { background: var(--warning); }
-.reminder-card.danger .reminder-progress-bar { background: var(--danger); }
-.reminder-card.success .reminder-progress-bar { background: var(--success); }
-.reminder-status {
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: 12px;
-  font-size: 11px;
-  font-weight: 600;
-  margin-top: 8px;
-}
-.status-ok { background: rgba(16, 185, 129, 0.15); color: var(--success); }
-.status-warn { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
-.status-danger { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
-
-/* ===== Service Record ===== */
-.service-record {
-  background: var(--surface-2);
-  border-radius: var(--radius-sm);
-  padding: 14px;
-  margin-bottom: 10px;
-  transition: var(--transition);
-  touch-action: pan-y;
-  position: relative;
-}
-.service-record:active { background: var(--border); }
-.service-record-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
-.service-category {
-  display: inline-block;
-  padding: 3px 10px;
-  background: var(--primary);
-  color: white;
-  border-radius: 12px;
-  font-size: 11px;
-  font-weight: 600;
-}
-.service-date { font-size: 11px; color: var(--text-muted); }
-.service-desc { font-size: 13px; margin-bottom: 6px; line-height: 1.6; }
-.service-meta { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted); }
-.service-cost { font-weight: 700; color: var(--primary); }
-.service-actions { display: flex; gap: 8px; margin-top: 10px; }
-.service-actions button {
-  padding: 6px 12px;
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 600;
-  transition: var(--transition);
-}
-.btn-edit { background: var(--primary); color: white; }
-.btn-delete { background: var(--danger); color: white; }
-
-/* ===== FAB ===== */
-.fab {
-  position: fixed;
-  bottom: calc(80px + var(--safe-bottom));
-  left: 20px;
-  width: 56px; height: 56px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: white;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 6px 20px rgba(30, 64, 175, 0.4);
-  z-index: 90;
-  transition: var(--transition);
-}
-.fab:active { transform: scale(0.9); }
-.fab svg { width: 24px; height: 24px; fill: white; }
-
-/* ===== Bottom Navigation ===== */
-.bottom-nav {
-  position: fixed;
-  bottom: 0; left: 0; right: 0;
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  display: flex;
-  padding: 8px 0 calc(8px + var(--safe-bottom));
-  z-index: 95;
-  box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
-}
-.nav-item {
-  flex: 1;
-  display: flex; flex-direction: column; align-items: center;
-  padding: 8px 4px;
-  color: var(--text-muted);
-  transition: var(--transition);
-  position: relative;
-}
-.nav-item.active { color: var(--primary); }
-.nav-item.active::before {
-  content: '';
-  position: absolute;
-  top: -8px;
-  width: 32px; height: 3px;
-  background: var(--primary);
-  border-radius: 0 0 3px 3px;
-}
-.nav-item svg { width: 22px; height: 22px; fill: currentColor; margin-bottom: 4px; }
-.nav-item span { font-size: 11px; font-weight: 500; }
-
-/* ===== Modal ===== */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-  backdrop-filter: blur(4px);
-  z-index: 200;
-  display: none;
-  align-items: flex-end;
-  justify-content: center;
-  animation: fadeIn 0.2s ease;
-}
-.modal-overlay.show { display: flex; }
-.modal {
-  background: var(--surface);
-  border-radius: var(--radius) var(--radius) 0 0;
-  width: 100%;
-  max-width: 720px;
-  max-height: 92vh;
-  overflow-y: auto;
-  padding: 20px;
-  padding-bottom: calc(20px + var(--safe-bottom));
-  animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.modal-header {
-  display: flex; justify-content: space-between; align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid var(--border);
-}
-.modal-title { font-size: 18px; font-weight: 700; }
-.modal-close {
-  width: 32px; height: 32px;
-  border-radius: 50%;
-  background: var(--surface-2);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px;
-  color: var(--text-muted);
-}
-
-/* ===== Form ===== */
-.form-group { margin-bottom: 16px; }
-.form-label {
-  display: block;
-  font-size: 13px;
-  font-weight: 600;
-  margin-bottom: 6px;
-  color: var(--text);
-}
-.form-label .required { color: var(--danger); }
-.form-input, .form-select, .form-textarea {
-  width: 100%;
-  padding: 12px 14px;
-  background: var(--surface-2);
-  border: 2px solid transparent;
-  border-radius: var(--radius-sm);
-  font-size: 14px;
-  color: var(--text);
-  transition: var(--transition);
-  font-family: inherit;
-}
-.form-input:focus, .form-select:focus, .form-textarea:focus {
-  outline: none;
-  border-color: var(--primary);
-  background: var(--surface);
-}
-.form-textarea { resize: vertical; min-height: 80px; }
-.form-hint { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
-
-.checkbox-group {
-  display: flex; align-items: center; gap: 10px;
-  padding: 12px;
-  background: var(--surface-2);
-  border-radius: var(--radius-sm);
-}
-.checkbox-group input[type="checkbox"] {
-  width: 20px; height: 20px;
-  accent-color: var(--primary);
-}
-
-/* ===== Buttons ===== */
-.btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  padding: 12px 20px;
-  border-radius: var(--radius-sm);
-  font-size: 14px;
-  font-weight: 600;
-  transition: var(--transition);
-  width: 100%;
-}
-.btn:active { transform: scale(0.98); }
-.btn-primary { background: var(--primary); color: white; }
-.btn-primary:active { background: var(--primary-dark); }
-.btn-secondary { background: var(--surface-2); color: var(--text); }
-.btn-danger { background: var(--danger); color: white; }
-.btn-success { background: var(--success); color: white; }
-.btn-group { display: flex; gap: 10px; margin-top: 16px; }
-.btn-group .btn { flex: 1; }
-
-/* ===== Toast ===== */
-.toast-container {
-  position: fixed;
-  top: calc(var(--safe-top) + 20px);
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 300;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  pointer-events: none;
-}
-.toast {
-  background: var(--text);
-  color: var(--bg);
-  padding: 12px 20px;
-  border-radius: 30px;
-  font-size: 13px;
-  font-weight: 500;
-  box-shadow: var(--shadow-lg);
-  animation: toastIn 0.3s ease, toastOut 0.3s ease 2.7s forwards;
-  display: flex; align-items: center; gap: 8px;
-}
-.toast.success { background: var(--success); color: white; }
-.toast.error { background: var(--danger); color: white; }
-.toast.warning { background: var(--warning); color: white; }
-@keyframes toastIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes toastOut { to { opacity: 0; transform: translateY(-20px); } }
-
-/* ===== Empty State ===== */
-.empty-state {
-  text-align: center;
-  padding: 40px 20px;
-  color: var(--text-muted);
-}
-.empty-state-icon { font-size: 48px; margin-bottom: 12px; opacity: 0.5; }
-.empty-state-title { font-size: 15px; font-weight: 600; margin-bottom: 6px; color: var(--text); }
-.empty-state-desc { font-size: 13px; line-height: 1.6; }
-
-/* ===== Filter Chips ===== */
-.filter-chips {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  padding-bottom: 8px;
-  margin-bottom: 12px;
-  scrollbar-width: none;
-}
-.filter-chips::-webkit-scrollbar { display: none; }
-.chip {
-  padding: 8px 14px;
-  background: var(--surface-2);
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 500;
-  white-space: nowrap;
-  transition: var(--transition);
-  border: 1px solid transparent;
-}
-.chip.active {
-  background: var(--primary);
-  color: white;
-}
-
-/* ===== Responsive ===== */
-@media (min-width: 768px) {
-  .modal { border-radius: var(--radius); margin: auto; max-height: 85vh; }
-  .modal-overlay { align-items: center; }
-}
-
-/* ===== Scrollbar ===== */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-
-/* ===== Print ===== */
-@media print {
-  .app-header, .bottom-nav, .fab, .install-banner { display: none !important; }
-  .main-content { padding: 0; }
-}
+:root{--primary:#1e40af;--primary-light:#3b82f6;--primary-dark:#1e3a8a;--success:#10b981;--warning:#f59e0b;--danger:#ef4444;--bg:#f8fafc;--surface:#ffffff;--surface-2:#f1f5f9;--text:#0f172a;--text-muted:#64748b;--border:#e2e8f0;--shadow:0 1px 3px rgba(0,0,0,0.08);--shadow-lg:0 10px 25px rgba(0,0,0,0.1);--radius:16px;--radius-sm:10px;--transition:all 0.25s cubic-bezier(0.4,0,0.2,1);--safe-top:env(safe-area-inset-top);--safe-bottom:env(safe-area-inset-bottom)}
+[data-theme="dark"]{--primary:#3b82f6;--primary-light:#60a5fa;--primary-dark:#2563eb;--bg:#0f172a;--surface:#1e293b;--surface-2:#334155;--text:#f1f5f9;--text-muted:#94a3b8;--border:#334155;--shadow:0 1px 3px rgba(0,0,0,0.3);--shadow-lg:0 10px 25px rgba(0,0,0,0.4)}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{font-family:'Vazirmatn',Tahoma,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background 0.3s,color 0.3s}
+button,input,select,textarea{font-family:inherit}
+button{cursor:pointer;border:none;background:none;color:inherit}
+.app-header{position:sticky;top:0;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:white;padding:calc(var(--safe-top) + 16px) 20px 20px;z-index:100;box-shadow:var(--shadow-lg)}
+.header-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.app-title{font-size:22px;font-weight:700;display:flex;align-items:center;gap:8px}
+.app-title::before{content:"🚗";font-size:24px}
+.header-actions{display:flex;gap:8px}
+.icon-btn{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;transition:var(--transition);backdrop-filter:blur(10px)}
+.icon-btn:active{transform:scale(0.9);background:rgba(255,255,255,0.25)}
+.icon-btn svg{width:20px;height:20px;fill:white}
+.car-info{background:rgba(255,255,255,0.12);border-radius:var(--radius-sm);padding:12px 16px;backdrop-filter:blur(10px);display:flex;justify-content:space-between;align-items:center}
+.car-name{font-size:14px;opacity:0.9}
+.km-display{font-size:20px;font-weight:700;display:flex;align-items:baseline;gap:4px}
+.km-display small{font-size:12px;opacity:0.8;font-weight:400}
+.km-update-btn{background:white;color:var(--primary);padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600;transition:var(--transition)}
+.km-update-btn:active{transform:scale(0.95)}
+.install-banner{background:linear-gradient(135deg,#10b981,#059669);color:white;padding:14px 20px;display:none;align-items:center;justify-content:space-between;gap:12px;animation:slideDown 0.4s ease}
+.install-banner.show{display:flex}
+.install-banner-text{font-size:14px;font-weight:500;flex:1}
+.install-btn{background:white;color:#059669;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:700;white-space:nowrap}
+.install-dismiss{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:18px}
+.main-content{padding:16px;padding-bottom:calc(80px + var(--safe-bottom));max-width:720px;margin:0 auto}
+.page{display:none;animation:fadeIn 0.3s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideDown{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px}
+.stat-card{background:var(--surface);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);transition:var(--transition);position:relative;overflow:hidden}
+.stat-card::before{content:'';position:absolute;top:0;right:0;width:4px;height:100%;background:var(--primary)}
+.stat-card.warning::before{background:var(--warning)}
+.stat-card.danger::before{background:var(--danger)}
+.stat-card.success::before{background:var(--success)}
+.stat-icon{width:36px;height:36px;border-radius:10px;background:var(--surface-2);display:flex;align-items:center;justify-content:center;margin-bottom:10px;font-size:18px}
+.stat-label{font-size:12px;color:var(--text-muted);margin-bottom:4px}
+.stat-value{font-size:20px;font-weight:700}
+.stat-value small{font-size:11px;color:var(--text-muted);font-weight:400;margin-right:4px}
+.section{background:var(--surface);border-radius:var(--radius);padding:16px;margin-bottom:16px;box-shadow:var(--shadow)}
+.section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.section-title{font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px}
+.section-title::before{content:'';width:4px;height:18px;background:var(--primary);border-radius:2px}
+.section-action{color:var(--primary);font-size:13px;font-weight:600;padding:6px 10px;border-radius:8px;transition:var(--transition)}
+.section-action:active{background:var(--surface-2)}
+.reminder-card{background:var(--surface-2);border-radius:var(--radius-sm);padding:14px;margin-bottom:10px;border-right:4px solid var(--primary);transition:var(--transition);position:relative;overflow:hidden}
+.reminder-card.warning{border-right-color:var(--warning);background:rgba(245,158,11,0.08)}
+.reminder-card.danger{border-right-color:var(--danger);background:rgba(239,68,68,0.08)}
+.reminder-card.success{border-right-color:var(--success)}
+.reminder-title{font-weight:700;margin-bottom:6px;font-size:14px}
+.reminder-info{display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted);margin-bottom:8px}
+.reminder-progress{height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.reminder-progress-bar{height:100%;background:var(--primary);border-radius:3px;transition:width 0.5s ease}
+.reminder-card.warning .reminder-progress-bar{background:var(--warning)}
+.reminder-card.danger .reminder-progress-bar{background:var(--danger)}
+.reminder-card.success .reminder-progress-bar{background:var(--success)}
+.reminder-status{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;margin-top:8px}
+.status-ok{background:rgba(16,185,129,0.15);color:var(--success)}
+.status-warn{background:rgba(245,158,11,0.15);color:var(--warning)}
+.status-danger{background:rgba(239,68,68,0.15);color:var(--danger)}
+.service-record{background:var(--surface-2);border-radius:var(--radius-sm);padding:14px;margin-bottom:10px;transition:var(--transition);touch-action:pan-y;position:relative}
+.service-record:active{background:var(--border)}
+.service-record-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.service-category{display:inline-block;padding:3px 10px;background:var(--primary);color:white;border-radius:12px;font-size:11px;font-weight:600}
+.service-date{font-size:11px;color:var(--text-muted)}
+.service-desc{font-size:13px;margin-bottom:6px;line-height:1.6}
+.service-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted)}
+.service-cost{font-weight:700;color:var(--primary)}
+.service-actions{display:flex;gap:8px;margin-top:10px}
+.service-actions button{padding:6px 12px;border-radius:8px;font-size:12px;font-weight:600;transition:var(--transition)}
+.btn-edit{background:var(--primary);color:white}
+.btn-delete{background:var(--danger);color:white}
+.fab{position:fixed;bottom:calc(80px + var(--safe-bottom));left:20px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:white;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(30,64,175,0.4);z-index:90;transition:var(--transition)}
+.fab:active{transform:scale(0.9)}
+.fab svg{width:24px;height:24px;fill:white}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border);display:flex;padding:8px 0 calc(8px + var(--safe-bottom));z-index:95;box-shadow:0 -2px 10px rgba(0,0,0,0.05)}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;padding:8px 4px;color:var(--text-muted);transition:var(--transition);position:relative}
+.nav-item.active{color:var(--primary)}
+.nav-item.active::before{content:'';position:absolute;top:-8px;width:32px;height:3px;background:var(--primary);border-radius:0 0 3px 3px}
+.nav-item svg{width:22px;height:22px;fill:currentColor;margin-bottom:4px}
+.nav-item span{font-size:11px;font-weight:500}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);backdrop-filter:blur(4px);z-index:200;display:none;align-items:flex-end;justify-content:center;animation:fadeIn 0.2s ease}
+.modal-overlay.show{display:flex}
+.modal{background:var(--surface);border-radius:var(--radius) var(--radius) 0 0;width:100%;max-width:720px;max-height:92vh;overflow-y:auto;padding:20px;padding-bottom:calc(20px + var(--safe-bottom));animation:slideUp 0.3s cubic-bezier(0.4,0,0.2,1)}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.modal-title{font-size:18px;font-weight:700}
+.modal-close{width:32px;height:32px;border-radius:50%;background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--text-muted)}
+.form-group{margin-bottom:16px}
+.form-label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--text)}
+.form-label .required{color:var(--danger)}
+.form-input,.form-select,.form-textarea{width:100%;padding:12px 14px;background:var(--surface-2);border:2px solid transparent;border-radius:var(--radius-sm);font-size:14px;color:var(--text);transition:var(--transition);font-family:inherit}
+.form-input:focus,.form-select:focus,.form-textarea:focus{outline:none;border-color:var(--primary);background:var(--surface)}
+.form-textarea{resize:vertical;min-height:80px}
+.form-hint{font-size:11px;color:var(--text-muted);margin-top:4px}
+.checkbox-group{display:flex;align-items:center;gap:10px;padding:12px;background:var(--surface-2);border-radius:var(--radius-sm)}
+.checkbox-group input[type="checkbox"]{width:20px;height:20px;accent-color:var(--primary)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:var(--radius-sm);font-size:14px;font-weight:600;transition:var(--transition);width:100%}
+.btn:active{transform:scale(0.98)}
+.btn-primary{background:var(--primary);color:white}
+.btn-primary:active{background:var(--primary-dark)}
+.btn-secondary{background:var(--surface-2);color:var(--text)}
+.btn-danger{background:var(--danger);color:white}
+.btn-success{background:var(--success);color:white}
+.btn-group{display:flex;gap:10px;margin-top:16px}
+.btn-group .btn{flex:1}
+.toast-container{position:fixed;top:calc(var(--safe-top) + 20px);left:50%;transform:translateX(-50%);z-index:300;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.toast{background:var(--text);color:var(--bg);padding:12px 20px;border-radius:30px;font-size:13px;font-weight:500;box-shadow:var(--shadow-lg);animation:toastIn 0.3s ease,toastOut 0.3s ease 2.7s forwards;display:flex;align-items:center;gap:8px}
+.toast.success{background:var(--success);color:white}
+.toast.error{background:var(--danger);color:white}
+.toast.warning{background:var(--warning);color:white}
+@keyframes toastIn{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes toastOut{to{opacity:0;transform:translateY(-20px)}}
+.empty-state{text-align:center;padding:40px 20px;color:var(--text-muted)}
+.empty-state-icon{font-size:48px;margin-bottom:12px;opacity:0.5}
+.empty-state-title{font-size:15px;font-weight:600;margin-bottom:6px;color:var(--text)}
+.empty-state-desc{font-size:13px;line-height:1.6}
+.filter-chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:12px;scrollbar-width:none}
+.filter-chips::-webkit-scrollbar{display:none}
+.chip{padding:8px 14px;background:var(--surface-2);border-radius:20px;font-size:12px;font-weight:500;white-space:nowrap;transition:var(--transition);border:1px solid transparent}
+.chip.active{background:var(--primary);color:white}
+@media(min-width:768px){.modal{border-radius:var(--radius);margin:auto;max-height:85vh}.modal-overlay{align-items:center}}
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+@media print{.app-header,.bottom-nav,.fab,.install-banner{display:none!important}.main-content{padding:0}}
 </style>
 </head>
 <body>
-
-<!-- ===== Header ===== -->
 <header class="app-header">
-  <div class="header-top">
-    <div class="app-title">کارنو</div>
-    <div class="header-actions">
-      <button class="icon-btn" id="themeToggle" title="تغییر تم">
-        <svg id="themeIcon" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
-      </button>
-      <button class="icon-btn" id="shareBtn" title="اشتراک‌گذاری">
-        <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
-      </button>
-    </div>
-  </div>
-  <div class="car-info">
-    <div>
-      <div class="car-name" id="headerCarName">خودروی من</div>
-      <div class="km-display">
-        <span id="headerKm">۰</span>
-        <small>کیلومتر</small>
-      </div>
-    </div>
-    <button class="km-update-btn" onclick="openKmModal()">بروزرسانی</button>
-  </div>
-</header>
-
-<!-- ===== Install Banner ===== -->
-<div class="install-banner" id="installBanner">
-  <span class="install-banner-text">📱 نصب کارنو روی گوشی</span>
-  <button class="install-btn" id="installBtn">نصب</button>
-  <button class="install-dismiss" onclick="dismissInstall()">×</button>
-</div>
-
-<!-- ===== Main Content ===== -->
-<main class="main-content">
-
-  <!-- ===== Page: Dashboard ===== -->
-  <div class="page active" id="page-dashboard">
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-icon">🔧</div>
-        <div class="stat-label">کل سرویس‌ها</div>
-        <div class="stat-value" id="statServices">۰</div>
-      </div>
-      <div class="stat-card success">
-        <div class="stat-icon">💰</div>
-        <div class="stat-label">کل هزینه‌ها</div>
-        <div class="stat-value"><span id="statCost">۰</span><small>تومان</small></div>
-      </div>
-      <div class="stat-card warning">
-        <div class="stat-icon">⚠️</div>
-        <div class="stat-label">نیازمند بررسی</div>
-        <div class="stat-value" id="statWarning">۰</div>
-      </div>
-      <div class="stat-card danger">
-        <div class="stat-icon">🚨</div>
-        <div class="stat-label">هشدار فوری</div>
-        <div class="stat-value" id="statDanger">۰</div>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-header">
-        <div class="section-title">هشدارهای سررسید</div>
-        <button class="section-action" onclick="switchPage('reminders')">همه</button>
-      </div>
-      <div id="dashboardReminders"></div>
-    </div>
-
-    <div class="section">
-      <div class="section-header">
-        <div class="section-title">آخرین سرویس‌ها</div>
-        <button class="section-action" onclick="switchPage('history')">مشاهده همه</button>
-      </div>
-      <div id="dashboardServices"></div>
-    </div>
-  </div>
-
-  <!-- ===== Page: History ===== -->
-  <div class="page" id="page-history">
-    <div class="section">
-      <div class="section-header">
-        <div class="section-title">سوابق سرویس</div>
-        <button class="section-action" onclick="openServiceModal()">+ ثبت جدید</button>
-      </div>
-      <div class="filter-chips" id="historyFilters"></div>
-      <div id="historyList"></div>
-    </div>
-  </div>
-
-  <!-- ===== Page: Reminders ===== -->
-  <div class="page" id="page-reminders">
-    <div class="section">
-      <div class="section-header">
-        <div class="section-title">یادآورهای سرویس</div>
-        <button class="section-action" onclick="openReminderModal()">+ افزودن</button>
-      </div>
-      <div class="form-hint" style="margin-bottom:12px">
-        💡 هر هفته کیلومتر را بروزرسانی کنید. کمتر از ۱۰۰۰ کیلومتر مانده به سررسید = هشدار زرد. پس از سررسید = هشدار قرمز.
-      </div>
-      <div id="remindersList"></div>
-    </div>
-  </div>
-
-  <!-- ===== Page: Settings ===== -->
-  <div class="page" id="page-settings">
-    <div class="section">
-      <div class="section-title" style="margin-bottom:14px">مشخصات خودرو</div>
-      <div class="form-group">
-        <label class="form-label">نام یا مدل خودرو</label>
-        <input type="text" class="form-input" id="carName" placeholder="مثلاً: پژو ۲۰۶ تیپ ۵">
-      </div>
-      <div class="form-group">
-        <label class="form-label">شماره پلاک یا یادداشت</label>
-        <input type="text" class="form-input" id="carPlate" placeholder="مثلاً: ۱۲ ب ۳۴۵ - ایران ۶۷">
-      </div>
-      <button class="btn btn-primary" onclick="saveCarInfo()">ذخیره مشخصات</button>
-    </div>
-
-    <div class="section">
-      <div class="section-title" style="margin-bottom:14px">پشتیبان‌گیری</div>
-      <p style="font-size:13px;color:var(--text-muted);margin-bottom:14px;line-height:1.7">
-        🔒 تمام اطلاعات در حافظه گوشی شما ذخیره می‌شود. برای جلوگیری از حذف اتفاقی، از فایل پشتیبان استفاده کنید.
-      </p>
-      <div class="btn-group" style="flex-direction:column;gap:10px">
-        <button class="btn btn-primary" onclick="exportJSON()">📥 دانلود پشتیبان (JSON)</button>
-        <button class="btn btn-secondary" onclick="document.getElementById('importFile').click()">📤 بازیابی فایل پشتیبان</button>
-        <input type="file" id="importFile" accept=".json" style="display:none" onchange="importJSON(event)">
-        <button class="btn btn-success" onclick="exportCSV()">📊 خروجی جدول اکسل (CSV)</button>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-title" style="margin-bottom:14px">ابزارها</div>
-      <button class="btn btn-secondary" style="margin-bottom:10px" onclick="loadSampleData()">📦 بارگذاری سرویس‌های نمونه</button>
-      <button class="btn btn-danger" onclick="resetAll()">🗑️ حذف همه اطلاعات و بازنشانی</button>
-    </div>
-
-    <div class="section">
-      <div class="section-title" style="margin-bottom:14px">درباره کارنو</div>
-      <p style="font-size:13px;color:var(--text-muted);line-height:1.8">
-        نسخه ۲.۱ - PWA<br>
-        دستیار هوشمند نگهداری خودرو<br>
-        کاملاً آفلاین و مستقل از اینترنت<br>
-        🔐 اطلاعات شما فقط در گوشی شما ذخیره می‌شود
-      </p>
-    </div>
-  </div>
-
-</main>
-
-<!-- ===== FAB ===== -->
-<button class="fab" onclick="openServiceModal()" title="ثبت سرویس جدید">
-  <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+<div class="header-top">
+<div class="app-title">کارنو</div>
+<div class="header-actions">
+<button class="icon-btn" id="themeToggle" title="تغییر تم">
+<svg id="themeIcon" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
 </button>
-
-<!-- ===== Bottom Navigation ===== -->
+<button class="icon-btn" id="shareBtn" title="اشتراک‌گذاری">
+<svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+</button>
+</div>
+</div>
+<div class="car-info">
+<div>
+<div class="car-name" id="headerCarName">خودروی من</div>
+<div class="km-display">
+<span id="headerKm">۰</span>
+<small>کیلومتر</small>
+</div>
+</div>
+<button class="km-update-btn" onclick="openKmModal()">بروزرسانی</button>
+</div>
+</header>
+<div class="install-banner" id="installBanner">
+<span class="install-banner-text">📱 نصب کارنو روی گوشی</span>
+<button class="install-btn" id="installBtn">نصب</button>
+<button class="install-dismiss" onclick="dismissInstall()">×</button>
+</div>
+<main class="main-content">
+<div class="page active" id="page-dashboard">
+<div class="stats-grid">
+<div class="stat-card">
+<div class="stat-icon">🔧</div>
+<div class="stat-label">کل سرویس‌ها</div>
+<div class="stat-value" id="statServices">۰</div>
+</div>
+<div class="stat-card success">
+<div class="stat-icon">💰</div>
+<div class="stat-label">کل هزینه‌ها</div>
+<div class="stat-value"><span id="statCost">۰</span><small>تومان</small></div>
+</div>
+<div class="stat-card warning">
+<div class="stat-icon">⚠️</div>
+<div class="stat-label">نیازمند بررسی</div>
+<div class="stat-value" id="statWarning">۰</div>
+</div>
+<div class="stat-card danger">
+<div class="stat-icon">🚨</div>
+<div class="stat-label">هشدار فوری</div>
+<div class="stat-value" id="statDanger"></div>
+</div>
+</div>
+<div class="section">
+<div class="section-header">
+<div class="section-title">هشدارهای سررسید</div>
+<button class="section-action" onclick="switchPage('reminders')">همه</button>
+</div>
+<div id="dashboardReminders"></div>
+</div>
+<div class="section">
+<div class="section-header">
+<div class="section-title">آخرین سرویس‌ها</div>
+<button class="section-action" onclick="switchPage('history')">مشاهده همه</button>
+</div>
+<div id="dashboardServices"></div>
+</div>
+</div>
+<div class="page" id="page-history">
+<div class="section">
+<div class="section-header">
+<div class="section-title">سوابق سرویس</div>
+<button class="section-action" onclick="openServiceModal()">+ ثبت جدید</button>
+</div>
+<div class="filter-chips" id="historyFilters"></div>
+<div id="historyList"></div>
+</div>
+</div>
+<div class="page" id="page-reminders">
+<div class="section">
+<div class="section-header">
+<div class="section-title">یادآورهای سرویس</div>
+<button class="section-action" onclick="openReminderModal()">+ افزودن</button>
+</div>
+<div class="form-hint" style="margin-bottom:12px">
+💡 هر هفته کیلومتر را بروزرسانی کنید. کمتر از ۱۰۰۰ کیلومتر مانده به سررسید = هشدار زرد. پس از سررسید = هشدار قرمز.
+</div>
+<div id="remindersList"></div>
+</div>
+</div>
+<div class="page" id="page-settings">
+<div class="section">
+<div class="section-title" style="margin-bottom:14px">مشخصات خودرو</div>
+<div class="form-group">
+<label class="form-label">نام یا مدل خودرو</label>
+<input type="text" class="form-input" id="carName" placeholder="مثلاً: پژو ۲۰۶ تیپ ۵">
+</div>
+<div class="form-group">
+<label class="form-label">شماره پلاک یا یادداشت</label>
+<input type="text" class="form-input" id="carPlate" placeholder="مثلاً: ۱۲ ب ۳۴۵ - ایران ۶۷">
+</div>
+<button class="btn btn-primary" onclick="saveCarInfo()">ذخیره مشخصات</button>
+</div>
+<div class="section">
+<div class="section-title" style="margin-bottom:14px">پشتیبان‌گیری</div>
+<p style="font-size:13px;color:var(--text-muted);margin-bottom:14px;line-height:1.7">
+🔒 تمام اطلاعات در حافظه گوشی شما ذخیره می‌شود. برای جلوگیری از حذف اتفاقی، از فایل پشتیبان استفاده کنید.
+</p>
+<div class="btn-group" style="flex-direction:column;gap:10px">
+<button class="btn btn-primary" onclick="exportJSON()"> دانلود پشتیبان (JSON)</button>
+<button class="btn btn-secondary" onclick="document.getElementById('importFile').click()">📤 بازیابی فایل پشتیبان</button>
+<input type="file" id="importFile" accept=".json" style="display:none" onchange="importJSON(event)">
+<button class="btn btn-success" onclick="exportCSV()">📊 خروجی جدول اکسل (CSV)</button>
+</div>
+</div>
+<div class="section">
+<div class="section-title" style="margin-bottom:14px">ابزارها</div>
+<button class="btn btn-secondary" style="margin-bottom:10px" onclick="loadSampleData()">📦 بارگذاری سرویس‌های نمونه</button>
+<button class="btn btn-danger" onclick="resetAll()">🗑️ حذف همه اطلاعات و بازنشانی</button>
+</div>
+<div class="section">
+<div class="section-title" style="margin-bottom:14px">درباره کارنو</div>
+<p style="font-size:13px;color:var(--text-muted);line-height:1.8">
+نسخه ۲.۱ - PWA<br>
+دستیار هوشمند نگهداری خودرو<br>
+کاملاً آفلاین و مستقل از اینترنت<br>
+🔐 اطلاعات شما فقط در گوشی شما ذخیره می‌شود
+</p>
+</div>
+</div>
+</main>
+<button class="fab" onclick="openServiceModal()" title="ثبت سرویس جدید">
+<svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+</button>
 <nav class="bottom-nav">
-  <button class="nav-item active" data-page="dashboard" onclick="switchPage('dashboard')">
-    <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
-    <span>داشبورد</span>
-  </button>
-  <button class="nav-item" data-page="history" onclick="switchPage('history')">
-    <svg viewBox="0 0 24 24"><path d="M13 3a9 9 0 0 0-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.954 8.954 0 0 0 13 21a9 9 0 0 0 0-18zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>
-    <span>سوابق</span>
-  </button>
-  <button class="nav-item" data-page="reminders" onclick="switchPage('reminders')">
-    <svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
-    <span>یادآورها</span>
-  </button>
-  <button class="nav-item" data-page="settings" onclick="switchPage('settings')">
-    <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94 0 .31.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
-    <span>تنظیمات</span>
-  </button>
+<button class="nav-item active" data-page="dashboard" onclick="switchPage('dashboard')">
+<svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+<span>داشبورد</span>
+</button>
+<button class="nav-item" data-page="history" onclick="switchPage('history')">
+<svg viewBox="0 0 24 24"><path d="M13 3a9 9 0 0 0-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.954 8.954 0 0 0 13 21a9 9 0 0 0 0-18zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>
+<span>سوابق</span>
+</button>
+<button class="nav-item" data-page="reminders" onclick="switchPage('reminders')">
+<svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+<span>یادآورها</span>
+</button>
+<button class="nav-item" data-page="settings" onclick="switchPage('settings')">
+<svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94 0 .31.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+<span>تنظیمات</span>
+</button>
 </nav>
-
-<!-- ===== Toast Container ===== -->
 <div class="toast-container" id="toastContainer"></div>
-
-<!-- ===== Modal: Update Kilometer ===== -->
 <div class="modal-overlay" id="kmModal">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title">به‌روزرسانی کارکرد</div>
-      <button class="modal-close" onclick="closeModal('kmModal')">×</button>
-    </div>
-    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;line-height:1.7">
-      عدد کیلومترشمار پشت آمپر خودرو را وارد کنید تا محاسبات یادآورها بازنگری شود.
-    </p>
-    <div class="form-group">
-      <label class="form-label">کیلومتر فعلی <span class="required">*</span></label>
-      <input type="number" class="form-input" id="newKm" placeholder="مثلاً: ۸۵۴۲۰" inputmode="numeric">
-    </div>
-    <div class="btn-group">
-      <button class="btn btn-secondary" onclick="closeModal('kmModal')">انصراف</button>
-      <button class="btn btn-primary" onclick="updateKm()">ذخیره</button>
-    </div>
-  </div>
+<div class="modal">
+<div class="modal-header">
+<div class="modal-title">به‌روزرسانی کارکرد</div>
+<button class="modal-close" onclick="closeModal('kmModal')">×</button>
 </div>
-
-<!-- ===== Modal: New/Edit Service ===== -->
+<p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;line-height:1.7">
+عدد کیلومترشمار پشت آمپر خودرو را وارد کنید تا محاسبات یادآورها بازنگری شود.
+</p>
+<div class="form-group">
+<label class="form-label">کیلومتر فعلی <span class="required">*</span></label>
+<input type="number" class="form-input" id="newKm" placeholder="مثلاً: ۸۵۴۲۰" inputmode="numeric">
+</div>
+<div class="btn-group">
+<button class="btn btn-secondary" onclick="closeModal('kmModal')">انصراف</button>
+<button class="btn btn-primary" onclick="updateKm()">ذخیره</button>
+</div>
+</div>
+</div>
 <div class="modal-overlay" id="serviceModal">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title" id="serviceModalTitle">ثبت سرویس جدید</div>
-      <button class="modal-close" onclick="closeModal('serviceModal')">×</button>
-    </div>
-    <input type="hidden" id="serviceEditId">
-    <div class="form-group">
-      <label class="form-label">دسته‌بندی سرویس <span class="required">*</span></label>
-      <select class="form-select" id="serviceCategory">
-        <option value="روغن و فیلتر">روغن موتور، فیلتر روغن و هوا</option>
-        <option value="سیستم ترمز">سیستم ترمز، لنت و دیسک</option>
-        <option value="تسمه‌ها">تسمه تایم، تسمه دینام و هرزگرد</option>
-        <option value="موتور">موتور، شمع، وایر و انژکتور</option>
-        <option value="گیربکس">روغن گیربکس، دیسک و صفحه کلاچ</option>
-        <option value="جلوبندی">جلوبندی، جعبه‌فرمان و کمک‌فنرها</option>
-        <option value="برق">باتری، دینام و برق خودرو</option>
-        <option value="لاستیک">تعویض، بالانس یا جابجایی لاستیک</option>
-        <option value="سایر">سایر تعمیرات</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label class="form-label">کیلومتر در زمان انجام <span class="required">*</span></label>
-      <input type="number" class="form-input" id="serviceKm" inputmode="numeric">
-    </div>
-    <div class="form-group">
-      <label class="form-label">تاریخ انجام <span class="required">*</span></label>
-      <input type="text" class="form-input" id="serviceDate" placeholder="مثلاً: ۱۴۰۳/۰۶/۱۵" inputmode="numeric">
-      <div class="form-hint">تاریخ شمسی: سال/ماه/روز</div>
-    </div>
-    <div class="form-group">
-      <label class="form-label">شرح عملیات و برند قطعات <span class="required">*</span></label>
-      <textarea class="form-textarea" id="serviceDesc" placeholder="مثلاً: تعویض روغن موتور بهرام ۱۰W-40 + فیلتر روغن..."></textarea>
-    </div>
-    <div class="form-group">
-      <label class="form-label">هزینه کل (تومان)</label>
-      <input type="number" class="form-input" id="serviceCost" placeholder="مثلاً: ۸۵۰۰۰۰" inputmode="numeric">
-    </div>
-    <div class="form-group">
-      <label class="form-label">تعمیرگاه / مکانیک</label>
-      <input type="text" class="form-input" id="serviceMechanic" placeholder="نام تعمیرگاه یا مکانیک">
-    </div>
-    <div class="form-group">
-      <label class="form-label">یادداشت اضافی</label>
-      <textarea class="form-textarea" id="serviceNote" placeholder="توضیحات بیشتر..."></textarea>
-    </div>
-    <div class="checkbox-group">
-      <input type="checkbox" id="serviceUpdateReminder" checked>
-      <label for="serviceUpdateReminder" style="font-size:13px">به‌روزرسانی خودکار یادآور مربوط به این دسته</label>
-    </div>
-    <div class="btn-group">
-      <button class="btn btn-secondary" onclick="closeModal('serviceModal')">انصراف</button>
-      <button class="btn btn-primary" onclick="saveService()">ذخیره سابقه</button>
-    </div>
-  </div>
+<div class="modal">
+<div class="modal-header">
+<div class="modal-title" id="serviceModalTitle">ثبت سرویس جدید</div>
+<button class="modal-close" onclick="closeModal('serviceModal')">×</button>
 </div>
-
-<!-- ===== Modal: New/Edit Reminder ===== -->
+<input type="hidden" id="serviceEditId">
+<div class="form-group">
+<label class="form-label">دسته‌بندی سرویس <span class="required">*</span></label>
+<select class="form-select" id="serviceCategory">
+<option value="روغن و فیلتر">روغن موتور، فیلتر روغن و هوا</option>
+<option value="سیستم ترمز">سیستم ترمز، لنت و دیسک</option>
+<option value="تسمه‌ها">تسمه تایم، تسمه دینام و هرزگرد</option>
+<option value="موتور">موتور، شمع، وایر و انژکتور</option>
+<option value="گیربکس">روغن گیربکس، دیسک و صفحه کلاچ</option>
+<option value="جلوبندی">جلوبندی، جعبه‌فرمان و کمک‌فنرها</option>
+<option value="برق">باتری، دینام و برق خودرو</option>
+<option value="لاستیک">تعویض، بالانس یا جابجایی لاستیک</option>
+<option value="سایر">سایر تعمیرات</option>
+</select>
+</div>
+<div class="form-group">
+<label class="form-label">کیلومتر در زمان انجام <span class="required">*</span></label>
+<input type="number" class="form-input" id="serviceKm" inputmode="numeric">
+</div>
+<div class="form-group">
+<label class="form-label">تاریخ انجام <span class="required">*</span></label>
+<input type="text" class="form-input" id="serviceDate" placeholder="مثلاً: ۱۴۰۳/۰/۱۵" inputmode="numeric">
+<div class="form-hint">تاریخ شمسی: سال/ماه/روز</div>
+</div>
+<div class="form-group">
+<label class="form-label">شرح عملیات و برند قطعات <span class="required">*</span></label>
+<textarea class="form-textarea" id="serviceDesc" placeholder="مثلاً: تعویض روغن موتور بهرام ۱۰W-40 + فیلتر روغن..."></textarea>
+</div>
+<div class="form-group">
+<label class="form-label">هزینه کل (تومان)</label>
+<input type="number" class="form-input" id="serviceCost" placeholder="مثلاً: ۸۵۰۰۰" inputmode="numeric">
+</div>
+<div class="form-group">
+<label class="form-label">تعمیرگاه / مکانیک</label>
+<input type="text" class="form-input" id="serviceMechanic" placeholder="نام تعمیرگاه یا مکانیک">
+</div>
+<div class="form-group">
+<label class="form-label">یادداشت اضافی</label>
+<textarea class="form-textarea" id="serviceNote" placeholder="توضیحات بیشتر..."></textarea>
+</div>
+<div class="checkbox-group">
+<input type="checkbox" id="serviceUpdateReminder" checked>
+<label for="serviceUpdateReminder" style="font-size:13px">به‌روزرسانی خودکار یادآور مربوط به این دسته</label>
+</div>
+<div class="btn-group">
+<button class="btn btn-secondary" onclick="closeModal('serviceModal')">انصراف</button>
+<button class="btn btn-primary" onclick="saveService()">ذخیره سابقه</button>
+</div>
+</div>
+</div>
 <div class="modal-overlay" id="reminderModal">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title" id="reminderModalTitle">تعریف یادآور سرویس</div>
-      <button class="modal-close" onclick="closeModal('reminderModal')">×</button>
-    </div>
-    <input type="hidden" id="reminderEditId">
-    <div class="form-group">
-      <label class="form-label">عنوان سرویس <span class="required">*</span></label>
-      <input type="text" class="form-input" id="reminderTitle" placeholder="مثلاً: تعویض روغن موتور">
-    </div>
-    <div class="form-group">
-      <label class="form-label">نوع محاسبه دوره</label>
-      <select class="form-select" id="reminderType" onchange="toggleReminderType()">
-        <option value="periodic">دوره‌ای (هر چند کیلومتر یک‌بار)</option>
-        <option value="fixed">کیلومتر مشخص و قطعی در آینده</option>
-      </select>
-    </div>
-    <div id="periodicFields">
-      <div class="form-group">
-        <label class="form-label">کیلومتر آخرین تعویض</label>
-        <input type="number" class="form-input" id="reminderLastKm" inputmode="numeric">
-      </div>
-      <div class="form-group">
-        <label class="form-label">دوره تعویض (کیلومتر) <span class="required">*</span></label>
-        <input type="number" class="form-input" id="reminderInterval" placeholder="مثلاً: ۵۰۰۰" inputmode="numeric">
-      </div>
-    </div>
-    <div id="fixedFields" style="display:none">
-      <div class="form-group">
-        <label class="form-label">سررسید در کیلومتر دقیق <span class="required">*</span></label>
-        <input type="number" class="form-input" id="reminderFixedKm" inputmode="numeric">
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="form-label">فاصله هشدار قبل از سررسید (کیلومتر)</label>
-      <input type="number" class="form-input" id="reminderWarnDistance" value="1000" inputmode="numeric">
-      <div class="form-hint">وقتی کمتر از این فاصله بماند وضعیت زرد می‌شود.</div>
-    </div>
-    <div class="btn-group">
-      <button class="btn btn-secondary" onclick="closeModal('reminderModal')">انصراف</button>
-      <button class="btn btn-primary" onclick="saveReminder()">ذخیره یادآور</button>
-    </div>
-  </div>
+<div class="modal">
+<div class="modal-header">
+<div class="modal-title" id="reminderModalTitle">تعریف یادآور سرویس</div>
+<button class="modal-close" onclick="closeModal('reminderModal')">×</button>
 </div>
-
+<input type="hidden" id="reminderEditId">
+<div class="form-group">
+<label class="form-label">عنوان سرویس <span class="required">*</span></label>
+<input type="text" class="form-input" id="reminderTitle" placeholder="مثلاً: تعویض روغن موتور">
+</div>
+<div class="form-group">
+<label class="form-label">نوع محاسبه دوره</label>
+<select class="form-select" id="reminderType" onchange="toggleReminderType()">
+<option value="periodic">دوره‌ای (هر چند کیلومتر یک‌بار)</option>
+<option value="fixed">کیلومتر مشخص و قطعی در آینده</option>
+</select>
+</div>
+<div id="periodicFields">
+<div class="form-group">
+<label class="form-label">کیلومتر آخرین تعویض</label>
+<input type="number" class="form-input" id="reminderLastKm" inputmode="numeric">
+</div>
+<div class="form-group">
+<label class="form-label">دوره تعویض (کیلومتر) <span class="required">*</span></label>
+<input type="number" class="form-input" id="reminderInterval" placeholder="مثلاً: ۵۰۰۰" inputmode="numeric">
+</div>
+</div>
+<div id="fixedFields" style="display:none">
+<div class="form-group">
+<label class="form-label">سررسید در کیلومتر دقیق <span class="required">*</span></label>
+<input type="number" class="form-input" id="reminderFixedKm" inputmode="numeric">
+</div>
+</div>
+<div class="form-group">
+<label class="form-label">فاصله هشدار قبل از سررسید (کیلومتر)</label>
+<input type="number" class="form-input" id="reminderWarnDistance" value="1000" inputmode="numeric">
+<div class="form-hint">وقتی کمتر از این فاصله بماند وضعیت زرد می‌شود.</div>
+</div>
+<div class="btn-group">
+<button class="btn btn-secondary" onclick="closeModal('reminderModal')">انصراف</button>
+<button class="btn btn-primary" onclick="saveReminder()">ذخیره یادآور</button>
+</div>
+</div>
+</div>
 <script>
-// ==========================================
-// ===== Jalali Date Utilities =====
-// ==========================================
-function toJalali(gy, gm, gd) {
-  return jalaali.toJalaali(gy, gm, gd);
-}
-
-function toGregorian(jy, jm, jd) {
-  return jalaali.toGregorian(jy, jm, jd);
-}
-
-function formatJalaliDate(dateStr) {
-  if (!dateStr) return '';
-  const [gy, gm, gd] = dateStr.split('-').map(Number);
-  const j = toJalali(gy, gm, gd);
-  return `${toFa(j.jy)}/${toFa(String(j.jm).padStart(2, '0'))}/${toFa(String(j.jd).padStart(2, '0'))}`;
-}
-
-function parseJalaliDate(jalaliStr) {
-  const parts = jalaliStr.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).split('/');
-  if (parts.length !== 3) return null;
-  const [jy, jm, jd] = parts.map(Number);
-  if (isNaN(jy) || isNaN(jm) || isNaN(jd)) return null;
-  const g = toGregorian(jy, jm, jd);
-  return `${g.gy}-${String(g.gm).padStart(2, '0')}-${String(g.gd).padStart(2, '0')}`;
-}
-
-function todayJalali() {
-  const now = new Date();
-  const j = toJalali(now.getFullYear(), now.getMonth() + 1, now.getDate());
-  return `${j.jy}/${String(j.jm).padStart(2, '0')}/${String(j.jd).padStart(2, '0')}`;
-}
-
-// ==========================================
-// ===== IndexedDB Database Layer =====
-// ==========================================
-const DB_NAME = 'KarnoDB';
-const DB_VERSION = 1;
-let db = null;
-
-function openDB() {
-  return new Promise((resolve, reject) => {
-    const request = indexedDB.open(DB_NAME, DB_VERSION);
-    request.onerror = () => reject(request.error);
-    request.onsuccess = () => { db = request.result; resolve(db); };
-    request.onupgradeneeded = (event) => {
-      const database = event.target.result;
-      if (!database.objectStoreNames.contains('services')) {
-        const s = database.createObjectStore('services', { keyPath: 'id' });
-        s.createIndex('date', 'date');
-        s.createIndex('category', 'category');
-      }
-      if (!database.objectStoreNames.contains('reminders')) {
-        database.createObjectStore('reminders', { keyPath: 'id' });
-      }
-      if (!database.objectStoreNames.contains('settings')) {
-        database.createObjectStore('settings', { keyPath: 'key' });
-      }
-    };
-  });
-}
-
-function dbGetAll(store) {
-  return new Promise((resolve, reject) => {
-    const tx = db.transaction(store, 'readonly');
-    const req = tx.objectStore(store).getAll();
-    req.onsuccess = () => resolve(req.result);
-    req.onerror = () => reject(req.error);
-  });
-}
-
-function dbPut(store, data) {
-  return new Promise((resolve, reject) => {
-    const tx = db.transaction(store, 'readwrite');
-    tx.objectStore(store).put(data);
-    tx.oncomplete = () => resolve();
-    tx.onerror = () => reject(tx.error);
-  });
-}
-
-function dbDelete(store, id) {
-  return new Promise((resolve, reject) => {
-    const tx = db.transaction(store, 'readwrite');
-    tx.objectStore(store).delete(id);
-    tx.oncomplete = () => resolve();
-    tx.onerror = () => reject(tx.error);
-  });
-}
-
-function dbClear(store) {
-  return new Promise((resolve, reject) => {
-    const tx = db.transaction(store, 'readwrite');
-    tx.objectStore(store).clear();
-    tx.oncomplete = () => resolve();
-    tx.onerror = () => reject(tx.error);
-  });
-}
-
-function dbGetSetting(key) {
-  return new Promise((resolve, reject) => {
-    const tx = db.transaction('settings', 'readonly');
-    const req = tx.objectStore('settings').get(key);
-    req.onsuccess = () => resolve(req.result ? req.result.value : null);
-    req.onerror = () => reject(req.error);
-  });
-}
-
-function dbSetSetting(key, value) {
-  return dbPut('settings', { key, value });
-}
-
-// ==========================================
-// ===== State =====
-// ==========================================
-let state = {
-  currentKm: 0,
-  carName: 'خودروی من',
-  carPlate: '',
-  services: [],
-  reminders: [],
-  theme: 'light',
-  currentPage: 'dashboard',
-  historyFilter: 'all'
-};
-
-// ==========================================
-// ===== Utilities =====
-// ==========================================
-const toFa = (n) => String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
-const formatNum = (n) => toFa(Number(n).toLocaleString('en-US'));
-const formatMoney = (n) => toFa(Number(n || 0).toLocaleString('en-US'));
-const uid = () => Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
-
-function haptic(type = 'light') {
-  if (navigator.vibrate) {
-    const patterns = { light: 10, medium: 25, heavy: 40, success: [10, 50, 10], error: [30, 50, 30] };
-    navigator.vibrate(patterns[type] || 10);
-  }
-}
-
-function toast(msg, type = 'success') {
-  const container = document.getElementById('toastContainer');
-  const t = document.createElement('div');
-  t.className = `toast ${type}`;
-  const icons = { success: '✓', error: '✕', warning: '⚠', info: 'ℹ' };
-  t.innerHTML = `<span>${icons[type] || ''}</span><span>${msg}</span>`;
-  container.appendChild(t);
-  haptic(type === 'error' ? 'error' : 'success');
-  setTimeout(() => t.remove(), 3000);
-}
-
-// ==========================================
-// ===== Theme =====
-// ==========================================
-async function loadTheme() {
-  const saved = await dbGetSetting('theme');
-  state.theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-  applyTheme();
-}
-
-function applyTheme() {
-  document.documentElement.setAttribute('data-theme', state.theme);
-  const icon = document.getElementById('themeIcon');
-  if (state.theme === 'dark') {
-    icon.innerHTML = '<path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0a.996.996 0 0 0 0-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 0 0 0-1.41.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 0 0 0-1.41.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>';
-  } else {
-    icon.innerHTML = '<path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/>';
-  }
-}
-
-async function toggleTheme() {
-  state.theme = state.theme === 'light' ? 'dark' : 'light';
-  await dbSetSetting('theme', state.theme);
-  applyTheme();
-  haptic('light');
-}
-
-// ==========================================
-// ===== Navigation =====
-// ==========================================
-function switchPage(page) {
-  state.currentPage = page;
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-' + page).classList.add('active');
-  document.querySelectorAll('.nav-item').forEach(n => {
-    n.classList.toggle('active', n.dataset.page === page);
-  });
-  haptic('light');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// ==========================================
-// ===== Modal =====
-// ==========================================
-function openModal(id) {
-  document.getElementById(id).classList.add('show');
-  document.body.style.overflow = 'hidden';
-  haptic('light');
-}
-function closeModal(id) {
-  document.getElementById(id).classList.remove('show');
-  document.body.style.overflow = '';
-}
-
-function openKmModal() {
-  document.getElementById('newKm').value = state.currentKm || '';
-  openModal('kmModal');
-}
-
-function openServiceModal(editId = null) {
-  document.getElementById('serviceEditId').value = editId || '';
-  document.getElementById('serviceModalTitle').textContent = editId ? 'ویرایش سرویس' : 'ثبت سرویس جدید';
-  
-  if (editId) {
-    const service = state.services.find(s => s.id === editId);
-    if (service) {
-      document.getElementById('serviceCategory').value = service.category;
-      document.getElementById('serviceKm').value = service.km;
-      document.getElementById('serviceDate').value = formatJalaliDate(service.date);
-      document.getElementById('serviceDesc').value = service.desc;
-      document.getElementById('serviceCost').value = service.cost || '';
-      document.getElementById('serviceMechanic').value = service.mechanic || '';
-      document.getElementById('serviceNote').value = service.note || '';
-      document.getElementById('serviceUpdateReminder').checked = false;
-    }
-  } else {
-    document.getElementById('serviceCategory').value = 'روغن و فیلتر';
-    document.getElementById('serviceKm').value = state.currentKm || '';
-    document.getElementById('serviceDate').value = todayJalali();
-    document.getElementById('serviceDesc').value = '';
-    document.getElementById('serviceCost').value = '';
-    document.getElementById('serviceMechanic').value = '';
-    document.getElementById('serviceNote').value = '';
-    document.getElementById('serviceUpdateReminder').checked = true;
-  }
-  
-  openModal('serviceModal');
-}
-
-function openReminderModal(editId = null) {
-  document.getElementById('reminderEditId').value = editId || '';
-  document.getElementById('reminderModalTitle').textContent = editId ? 'ویرایش یادآور' : 'تعریف یادآور سرویس';
-  
-  if (editId) {
-    const reminder = state.reminders.find(r => r.id === editId);
-    if (reminder) {
-      document.getElementById('reminderTitle').value = reminder.title;
-      document.getElementById('reminderType').value = reminder.type;
-      document.getElementById('reminderWarnDistance').value = reminder.warnDistance || 1000;
-      
-      if (reminder.type === 'periodic') {
-        document.getElementById('reminderLastKm').value = reminder.lastKm || '';
-        document.getElementById('reminderInterval').value = reminder.interval || '';
-      } else {
-        document.getElementById('reminderFixedKm').value = reminder.fixedKm || '';
-      }
-      
-      toggleReminderType();
-    }
-  } else {
-    document.getElementById('reminderTitle').value = '';
-    document.getElementById('reminderType').value = 'periodic';
-    document.getElementById('reminderLastKm').value = state.currentKm || '';
-    document.getElementById('reminderInterval').value = '';
-    document.getElementById('reminderFixedKm').value = '';
-    document.getElementById('reminderWarnDistance').value = 1000;
-    toggleReminderType();
-  }
-  
-  openModal('reminderModal');
-}
-
-function toggleReminderType() {
-  const type = document.getElementById('reminderType').value;
-  document.getElementById('periodicFields').style.display = type === 'periodic' ? 'block' : 'none';
-  document.getElementById('fixedFields').style.display = type === 'fixed' ? 'block' : 'none';
-}
-
-// ==========================================
-// ===== Data Operations =====
-// ==========================================
-async function updateKm() {
-  const km = parseInt(document.getElementById('newKm').value);
-  if (isNaN(km) || km < 0) {
-    toast('لطفاً یک عدد معتبر وارد کنید', 'error');
-    return;
-  }
-  if (km < state.currentKm) {
-    if (!confirm(`کیلومتر جدید (${formatNum(km)}) کمتر از کیلومتر فعلی (${formatNum(state.currentKm)}) است. آیا مطمئنید؟`)) return;
-  }
-  state.currentKm = km;
-  await dbSetSetting('currentKm', km);
-  closeModal('kmModal');
-  toast('کیلومتر بروزرسانی شد', 'success');
-  renderAll();
-}
-
-async function saveService() {
-  const editId = document.getElementById('serviceEditId').value;
-  const category = document.getElementById('serviceCategory').value;
-  const km = parseInt(document.getElementById('serviceKm').value);
-  const dateJalali = document.getElementById('serviceDate').value.trim();
-  const desc = document.getElementById('serviceDesc').value.trim();
-  const cost = parseInt(document.getElementById('serviceCost').value) || 0;
-  const mechanic = document.getElementById('serviceMechanic').value.trim();
-  const note = document.getElementById('serviceNote').value.trim();
-  const updateReminder = document.getElementById('serviceUpdateReminder').checked;
-
-  if (!desc) { toast('شرح عملیات الزامی است', 'error'); return; }
-  if (isNaN(km)) { toast('کیلومتر الزامی است', 'error'); return; }
-  if (!dateJalali) { toast('تاریخ الزامی است', 'error'); return; }
-
-  const dateGregorian = parseJalaliDate(dateJalali);
-  if (!dateGregorian) { toast('تاریخ نامعتبر است', 'error'); return; }
-
-  let service;
-  if (editId) {
-    service = state.services.find(s => s.id === editId);
-    if (service) {
-      service.category = category;
-      service.km = km;
-      service.date = dateGregorian;
-      service.desc = desc;
-      service.cost = cost;
-      service.mechanic = mechanic;
-      service.note = note;
-      await dbPut('services', service);
-    }
-  } else {
-    service = { id: uid(), category, km, date: dateGregorian, desc, cost, mechanic, note, createdAt: Date.now() };
-    await dbPut('services', service);
-    state.services.push(service);
-  }
-
-  state.services.sort((a, b) => b.createdAt - a.createdAt);
-
-  if (updateReminder) {
-    const related = state.reminders.find(r => r.title.includes(category.split(' ')[0]) && r.type === 'periodic');
-    if (related) {
-      related.lastKm = km;
-      await dbPut('reminders', related);
-    }
-  }
-
-  closeModal('serviceModal');
-  toast(editId ? 'سرویس ویرایش شد' : 'سرویس با موفقیت ثبت شد', 'success');
-  renderAll();
-}
-
-async function saveReminder() {
-  const editId = document.getElementById('reminderEditId').value;
-  const title = document.getElementById('reminderTitle').value.trim();
-  const type = document.getElementById('reminderType').value;
-  const warnDistance = parseInt(document.getElementById('reminderWarnDistance').value) || 1000;
-
-  if (!title) { toast('عنوان الزامی است', 'error'); return; }
-
-  let reminder;
-  if (editId) {
-    reminder = state.reminders.find(r => r.id === editId);
-    if (reminder) {
-      reminder.title = title;
-      reminder.type = type;
-      reminder.warnDistance = warnDistance;
-      
-      if (type === 'periodic') {
-        const lastKm = parseInt(document.getElementById('reminderLastKm').value) || 0;
-        const interval = parseInt(document.getElementById('reminderInterval').value);
-        if (!interval || interval <= 0) { toast('دوره تعویض الزامی است', 'error'); return; }
-        reminder.lastKm = lastKm;
-        reminder.interval = interval;
-      } else {
-        const fixedKm = parseInt(document.getElementById('reminderFixedKm').value);
-        if (!fixedKm) { toast('کیلومتر سررسید الزامی است', 'error'); return; }
-        reminder.fixedKm = fixedKm;
-      }
-      
-      await dbPut('reminders', reminder);
-    }
-  } else {
-    reminder = { id: uid(), title, type, warnDistance, createdAt: Date.now() };
-    
-    if (type === 'periodic') {
-      const lastKm = parseInt(document.getElementById('reminderLastKm').value) || 0;
-      const interval = parseInt(document.getElementById('reminderInterval').value);
-      if (!interval || interval <= 0) { toast('دوره تعویض الزامی است', 'error'); return; }
-      reminder.lastKm = lastKm;
-      reminder.interval = interval;
-    } else {
-      const fixedKm = parseInt(document.getElementById('reminderFixedKm').value);
-      if (!fixedKm) { toast('کیلومتر سررسید الزامی است', 'error'); return; }
-      reminder.fixedKm = fixedKm;
-    }
-    
-    await dbPut('reminders', reminder);
-    state.reminders.push(reminder);
-  }
-
-  closeModal('reminderModal');
-  toast(editId ? 'یادآور ویرایش شد' : 'یادآور اضافه شد', 'success');
-  renderAll();
-}
-
-async function deleteService(id) {
-  if (!confirm('این سابقه حذف شود؟')) return;
-  await dbDelete('services', id);
-  state.services = state.services.filter(s => s.id !== id);
-  toast('سابقه حذف شد', 'success');
-  renderAll();
-}
-
-async function deleteReminder(id) {
-  if (!confirm('این یادآور حذف شود؟')) return;
-  await dbDelete('reminders', id);
-  state.reminders = state.reminders.filter(r => r.id !== id);
-  toast('یادآور حذف شد', 'success');
-  renderAll();
-}
-
-// ==========================================
-// ===== Reminder Status =====
-// ==========================================
-function getReminderStatus(r) {
-  let nextKm, remaining;
-  if (r.type === 'periodic') {
-    nextKm = (r.lastKm || 0) + r.interval;
-    remaining = nextKm - state.currentKm;
-  } else {
-    nextKm = r.fixedKm;
-    remaining = nextKm - state.currentKm;
-  }
-
-  if (remaining < 0) {
-    return { status: 'danger', label: 'عقب افتاده', remaining, nextKm, percent: 100 };
-  } else if (remaining <= r.warnDistance) {
-    return { status: 'warning', label: 'نزدیک به سررسید', remaining, nextKm, percent: Math.min(100, ((r.type === 'periodic' ? r.interval : (r.fixedKm - (r.lastKm || 0))) - remaining) / (r.type === 'periodic' ? r.interval : (r.fixedKm - (r.lastKm || 0))) * 100) };
-  } else {
-    const total = r.type === 'periodic' ? r.interval : (r.fixedKm - (r.lastKm || 0));
-    const done = total - remaining;
-    return { status: 'success', label: 'مناسب', remaining, nextKm, percent: Math.max(0, (done / total) * 100) };
-  }
-}
-
-// ==========================================
-// ===== Rendering =====
-// ==========================================
-function renderHeader() {
-  document.getElementById('headerCarName').textContent = state.carName;
-  document.getElementById('headerKm').textContent = formatNum(state.currentKm);
-}
-
-function renderStats() {
-  const totalServices = state.services.length;
-  const totalCost = state.services.reduce((s, x) => s + (x.cost || 0), 0);
-  let warnings = 0, dangers = 0;
-  state.reminders.forEach(r => {
-    const st = getReminderStatus(r).status;
-    if (st === 'warning') warnings++;
-    if (st === 'danger') dangers++;
-  });
-  document.getElementById('statServices').textContent = toFa(totalServices);
-  document.getElementById('statCost').textContent = formatMoney(totalCost);
-  document.getElementById('statWarning').textContent = toFa(warnings);
-  document.getElementById('statDanger').textContent = toFa(dangers);
-}
-
-function renderReminderCard(r, showActions = true) {
-  const st = getReminderStatus(r);
-  const remainingText = st.remaining >= 0
-    ? `${formatNum(st.remaining)} کیلومتر مانده`
-    : `${formatNum(Math.abs(st.remaining))} کیلومتر عقب`;
-  return `
-    <div class="reminder-card ${st.status}">
-      <div class="reminder-title">${r.title}</div>
-      <div class="reminder-info">
-        <span>سررسید: ${formatNum(st.nextKm)} km</span>
-        <span>${remainingText}</span>
-      </div>
-      <div class="reminder-progress"><div class="reminder-progress-bar" style="width:${st.percent}%"></div></div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
-        <span class="reminder-status status-${st.status}">${st.label}</span>
-        ${showActions ? `
-          <div style="display:flex;gap:8px">
-            <button class="section-action" onclick="openReminderModal('${r.id}')">ویرایش</button>
-            <button class="section-action" style="color:var(--danger)" onclick="deleteReminder('${r.id}')">حذف</button>
-          </div>
-        ` : ''}
-      </div>
-    </div>
-  `;
-}
-
-function renderServiceCard(s, showActions = true) {
-  return `
-    <div class="service-record">
-      <div class="service-record-header">
-        <span class="service-category">${s.category}</span>
-        <span class="service-date">${formatJalaliDate(s.date)} • ${formatNum(s.km)} km</span>
-      </div>
-      <div class="service-desc">${s.desc}</div>
-      ${s.mechanic ? `<div style="font-size:12px;color:var(--text-muted);margin-bottom:4px">🔧 ${s.mechanic}</div>` : ''}
-      <div class="service-meta">
-        <span>${s.note || ''}</span>
-        <span class="service-cost">${s.cost ? formatMoney(s.cost) + ' تومان' : '—'}</span>
-      </div>
-      ${showActions ? `
-        <div class="service-actions">
-          <button class="btn-edit" onclick="openServiceModal('${s.id}')">ویرایش</button>
-          <button class="btn-delete" onclick="deleteService('${s.id}')">حذف</button>
-        </div>
-      ` : ''}
-    </div>
-  `;
-}
-
-function renderDashboard() {
-  const sorted = [...state.reminders].sort((a, b) => {
-    const order = { danger: 0, warning: 1, success: 2 };
-    return order[getReminderStatus(a).status] - order[getReminderStatus(b).status];
-  });
-  const urgent = sorted.filter(r => ['danger', 'warning'].includes(getReminderStatus(r).status)).slice(0, 3);
-  const dashRem = document.getElementById('dashboardReminders');
-  if (urgent.length === 0) {
-    dashRem.innerHTML = `<div class="empty-state"><div class="empty-state-icon">✅</div><div class="empty-state-title">همه چیز مرتب است</div><div class="empty-state-desc">هیچ هشداری وجود ندارد</div></div>`;
-  } else {
-    dashRem.innerHTML = urgent.map(r => renderReminderCard(r, false)).join('');
-  }
-
-  const lastServices = state.services.slice(0, 3);
-  const dashServ = document.getElementById('dashboardServices');
-  if (lastServices.length === 0) {
-    dashServ.innerHTML = `<div class="empty-state"><div class="empty-state-icon">📋</div><div class="empty-state-title">هنوز سابقه‌ای ثبت نشده</div><div class="empty-state-desc">با دکمه + اولین سرویس را ثبت کنید</div></div>`;
-  } else {
-    dashServ.innerHTML = lastServices.map(s => renderServiceCard(s, false)).join('');
-  }
-}
-
-function renderHistory() {
-  const categories = ['همه', ...new Set(state.services.map(s => s.category))];
-  const filters = document.getElementById('historyFilters');
-  filters.innerHTML = categories.map(c => {
-    const val = c === 'همه' ? 'all' : c;
-    return `<button class="chip ${state.historyFilter === val ? 'active' : ''}" onclick="setHistoryFilter('${val}')">${c}</button>`;
-  }).join('');
-
-  const filtered = state.historyFilter === 'all' ? state.services : state.services.filter(s => s.category === state.historyFilter);
-  const list = document.getElementById('historyList');
-  if (filtered.length === 0) {
-    list.innerHTML = `<div class="empty-state"><div class="empty-state-icon">📋</div><div class="empty-state-title">سابقه‌ای یافت نشد</div></div>`;
-  } else {
-    list.innerHTML = filtered.map(s => renderServiceCard(s)).join('');
-  }
-}
-
-function setHistoryFilter(f) {
-  state.historyFilter = f;
-  renderHistory();
-}
-
-function renderReminders() {
-  const list = document.getElementById('remindersList');
-  if (state.reminders.length === 0) {
-    list.innerHTML = `<div class="empty-state"><div class="empty-state-icon">🔔</div><div class="empty-state-title">یادآوری تعریف نشده</div><div class="empty-state-desc">با دکمه + اولین یادآور را بسازید</div></div>`;
-  } else {
-    list.innerHTML = state.reminders.map(r => renderReminderCard(r)).join('');
-  }
-}
-
-function renderAll() {
-  renderHeader();
-  renderStats();
-  renderDashboard();
-  renderHistory();
-  renderReminders();
-}
-
-// ==========================================
-// ===== Car Info =====
-// ==========================================
-async function saveCarInfo() {
-  state.carName = document.getElementById('carName').value.trim() || 'خودروی من';
-  state.carPlate = document.getElementById('carPlate').value.trim();
-  await dbSetSetting('carName', state.carName);
-  await dbSetSetting('carPlate', state.carPlate);
-  renderHeader();
-  toast('مشخصات ذخیره شد', 'success');
-}
-
-async function loadCarInfo() {
-  state.carName = (await dbGetSetting('carName')) || 'خودروی من';
-  state.carPlate = (await dbGetSetting('carPlate')) || '';
-  document.getElementById('carName').value = state.carName;
-  document.getElementById('carPlate').value = state.carPlate;
-}
-
-// ==========================================
-// ===== Export / Import =====
-// ==========================================
-async function exportJSON() {
-  const data = {
-    version: '2.1',
-    exportedAt: new Date().toISOString(),
-    currentKm: state.currentKm,
-    carName: state.carName,
-    carPlate: state.carPlate,
-    services: state.services,
-    reminders: state.reminders
-  };
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `karno-backup-${todayJalali().replace(/\//g, '-')}.json`;
-  
-  if (navigator.share && navigator.canShare({ files: [new File([blob], 'backup.json')] })) {
-    try {
-      await navigator.share({ files: [new File([blob], 'karno-backup.json')], title: 'پشتیبان کارنو' });
-      toast('فایل ارسال شد', 'success');
-      return;
-    } catch (e)
+const DB_NAME='KarnoDB';const DB_VERSION=1;let db=null;
+function openDB(){return new Promise((resolve,reject)=>{const request=indexedDB.open(DB_NAME,DB_VERSION);request.onerror=()=>reject(request.error);request.onsuccess=()=>{db=request.result;resolve(db)};request.onupgradeneeded=(event)=>{const database=event.target.result;if(!database.objectStoreNames.contains('services')){const s=database.createObjectStore('services',{keyPath:'id'});s.createIndex('date','date');s.createIndex('category','category')}if(!database.objectStoreNames.contains('reminders')){database.createObjectStore('reminders',{keyPath:'id'})}if(!database.objectStoreNames.contains('settings')){database.createObjectStore('settings',{keyPath:'key'})}}})}
+function dbGetAll(store){return new Promise((resolve,reject)=>{const tx=db.transaction(store,'readonly');const req=tx.objectStore(store).getAll();req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)})}
+function dbPut(store,data){return new Promise((resolve,reject)=>{const tx=db.transaction(store,'readwrite');tx.objectStore(store).put(data);tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error)})}
+function dbDelete(store,id){return new Promise((resolve,reject)=>{const tx=db.transaction(store,'readwrite');tx.objectStore(store).delete(id);tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error)})}
+function dbClear(store){return new Promise((resolve,reject)=>{const tx=db.transaction(store,'readwrite');tx.objectStore(store).clear();tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error)})}
+function dbGetSetting(key){return new Promise((resolve,reject)=>{const tx=db.transaction('settings','readonly');const req=tx.objectStore('settings').get(key);req.onsuccess=()=>resolve(req.result?req.result.value:null);req.onerror=()=>reject(req.error)})}
+function dbSetSetting(key,value){return dbPut('settings',{key,value})}
+let state={currentKm:0,carName:'خودروی من',carPlate:'',services:[],reminders:[],theme:'light',currentPage:'dashboard',historyFilter:'all'};
+const toFa=(n)=>String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
+const formatNum=(n)=>toFa(Number(n).toLocaleString('en-US'));
+const formatMoney=(n)=>toFa(Number(n||0).toLocaleString('en-US'));
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).substr(2,5);
+function haptic(type='light'){if(navigator.vibrate){const patterns={light:10,medium:25,heavy:40,success:[10,50,10],error:[30,50,30]};navigator.vibrate(patterns[type]||10)}}
+function toast(msg,type='success'){const container=document.getElementById('toastContainer');const t=document.createElement('div');t.className=`toast ${type}`;const icons={success:'✓',error:'✕',warning:'⚠',info:'ℹ'};t.innerHTML=`<span>${icons[type]||''}</span><span>${msg}</span>`;container.appendChild(t);haptic(type==='error'?'error':'success');setTimeout(()=>t.remove(),3000)}
+async function loadTheme(){const saved=await dbGetSetting('theme');state.theme=saved||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');applyTheme()}
+function applyTheme(){document.documentElement.setAttribute('data-theme',state.theme);const icon=document.getElementById('themeIcon');if(state.theme==='dark'){icon.innerHTML='<path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0a.996.996 0 0 0 0-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 0 0 0-1.41.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 0 0 0-1.41.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>'}else{icon.innerHTML='<path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/>'}}
+async function toggleTheme(){state.theme=state.theme==='light'?'dark':'light';await dbSetSetting('theme',state.theme);applyTheme();haptic('light')}
+function switchPage(page){state.currentPage=page;document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+page).classList.add('active');document.querySelectorAll('.nav-item').forEach(n=>{n.classList.toggle('active',n.dataset.page===page)});haptic('light');window.scrollTo({top:0,behavior:'smooth'})}
+function openModal(id){document.getElementById(id).classList.add('show');document.body.style.overflow='hidden';haptic('light')}
+function closeModal(id){document.getElementById(id).classList.remove('show');document.body.style.overflow=''}
+function openKmModal(){document.getElementById('newKm').value=state.currentKm||'';openModal('kmModal')}
+function toJalali(gy,gm,gd){return jalaali.toJalaali(gy,gm,gd)}
+function toGregorian(jy,jm,jd){return jalaali.toGregorian(jy,jm,jd)}
+function formatJalaliDate(dateStr){if(!dateStr)return'';const[gy,gm,gd]=dateStr.split('-').map(Number);const j=toJalali(gy,gm,gd);return`${toFa(j.jy)}/${toFa(String(j.jm).padStart(2,'0'))}/${toFa(String(j.jd).padStart(2,'0'))}`}
+function parseJalaliDate(jalaliStr){const parts=jalaliStr.replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).split('/');if(parts.length!==3)return null;const[jy,jm,jd]=parts.map(Number);if(isNaN(jy)||isNaN(jm)||isNaN(jd))return null;const g=toGregorian(jy,jm,jd);return`${g.gy}-${String(g.gm).padStart(2,'0')}-${String(g.gd).padStart(2,'0')}`}
+function todayJalali(){const now=new Date();const j=toJalali(now.getFullYear(),now.getMonth()+1,now.getDate());return`${j.jy}/${String(j.jm).padStart(2,'0')}/${String(j.jd).padStart(2,'0')}`}
+function openServiceModal(editId=null){document.getElementById('serviceEditId').value=editId||'';document.getElementById('serviceModalTitle').textContent=editId?'ویرایش سرویس':'ثبت سرویس جدید';if(editId){const service=state.services.find(s=>s.id===editId);if(service){document.getElementById('serviceCategory').value=service.category;document.getElementById('serviceKm').value=service.km;document.getElementById('serviceDate').value=formatJalaliDate(service.date);document.getElementById('serviceDesc').value=service.desc;document.getElementById('serviceCost').value=service.cost||'';document.getElementById('serviceMechanic').value=service.mechanic||'';document.getElementById('serviceNote').value=service.note||'';document.getElementById('serviceUpdateReminder').checked=false}}else{document.getElementById('serviceCategory').value='روغن و فیلتر';document.getElementById('serviceKm').value=state.currentKm||'';document.getElementById('serviceDate').value=todayJalali();document.getElementById('serviceDesc').value='';document.getElementById('serviceCost').value='';document.getElementById('serviceMechanic').value='';document.getElementById('serviceNote').value='';document.getElementById('serviceUpdateReminder').checked=true}openModal('serviceModal')}
+function openReminderModal(editId=null){document.getElementById('reminderEditId').value=editId||'';document.getElementById('reminderModalTitle').textContent=editId?'ویرایش یادآور':'تعریف یادآور سرویس';if(editId){const reminder=state.reminders.find(r=>r.id===editId);if(reminder){document.getElementById('reminderTitle').value=reminder.title;document.getElementById('reminderType').value=reminder.type;document.getElementById('reminderWarnDistance').value=reminder.warnDistance||1000;if(reminder.type==='periodic'){document.getElementById('reminderLastKm').value=reminder.lastKm||'';document.getElementById('reminderInterval').value=reminder.interval||''}else{document.getElementById('reminderFixedKm').value=reminder.fixedKm||''}toggleReminderType()}}else{document.getElementById('reminderTitle').value='';document.getElementById('reminderType').value='periodic';document.getElementById('reminderLastKm').value=state.currentKm||'';document.getElementById('reminderInterval').value='';document.getElementById('reminderFixedKm').value='';document.getElementById('reminderWarnDistance').value=1000;toggleReminderType()}openModal('reminderModal')}
+function toggleReminderType(){const type=document.getElementById('reminderType').value;document.getElementById('periodicFields').style.display=type==='periodic'?'block':'none';document.getElementById('fixedFields').style.display=type==='fixed'?'block':'none'}
+async function updateKm(){const km=parseInt(document.getElementById('newKm').value);if(isNaN(km)||km<0){toast('لطفاً یک عدد معتبر وارد کنید','error');return}if(km<state.currentKm){if(!confirm(`کیلومتر جدید (${formatNum(km)}) کمتر از کیلومتر فعلی (${formatNum(state.currentKm)}) است. آیا مطمئنید؟`))return}state.currentKm=km;await dbSetSetting('currentKm',km);closeModal('kmModal');toast('کیلومتر بروزرسانی شد','success');renderAll()}
+async function saveService(){const editId=document.getElementById('serviceEditId').value;const category=document.getElementById('serviceCategory').value;const km=parseInt(document.getElementById('serviceKm').value);const dateJalali=document.getElementById('serviceDate').value.trim();const desc=document.getElementById('serviceDesc').value.trim();const cost=parseInt(document.getElementById('serviceCost').value)||0;const mechanic=document.getElementById('serviceMechanic').value.trim();const note=document.getElementById('serviceNote').value.trim();const updateReminder=document.getElementById('serviceUpdateReminder').checked;if(!desc){toast('شرح عملیات الزامی است','error');return}if(isNaN(km)){toast('کیلومتر الزامی است','error');return}if(!dateJalali){toast('تاریخ الزامی است','error');return}const dateGregorian=parseJalaliDate(dateJalali);if(!dateGregorian){toast('تاریخ نامعتبر است','error');return}let service;if(editId){service=state.services.find(s=>s.id===editId);if(service){service.category=category;service.km=km;service.date=dateGregorian;service.desc=desc;service.cost=cost;service.mechanic=mechanic;service.note=note;await dbPut('services',service)}}else{service={id:uid(),category,km,date:dateGregorian,desc,cost,mechanic,note,createdAt:Date.now()};await dbPut('services',service);state.services.push(service)}state.services.sort((a,b)=>b.createdAt-a.createdAt);if(updateReminder){const related=state.reminders.find(r=>r.title.includes(category.split(' ')[0])&&r.type==='periodic');if(related){related.lastKm=km;await dbPut('reminders',related)}}closeModal('serviceModal');toast(editId?'سرویس ویرایش شد':'سرویس با موفقیت ثبت شد','success');renderAll()}
+async function saveReminder(){const editId=document.getElementById('reminderEditId').value;const title=document.getElementById('reminderTitle').value.trim();const type=document.getElementById('reminderType').value;const warnDistance=parseInt(document.getElementById('reminderWarnDistance').value)||1000;if(!title){toast('عنوان الزامی است','error');return}let reminder;if(editId){reminder=state.reminders.find(r=>r.id===editId);if(reminder){reminder.title=title;reminder.type=type;reminder.warnDistance=warnDistance;if(type==='periodic'){const lastKm=parseInt(document.getElementById('reminderLastKm').value)||0;const interval=parseInt(document.getElementById('reminderInterval').value);if(!interval||interval<=0){toast('دوره تعویض الزامی است','error');return}reminder.lastKm=lastKm;reminder.interval=interval}else{const fixedKm=parseInt(document.getElementById('reminderFixedKm').value);if(!fixedKm){toast('کیلومتر سررسید الزامی است','error');return}reminder.fixedKm=fixedKm}await dbPut('reminders',reminder)}}else{reminder={id:uid(),title,type,warnDistance,createdAt:Date.now()};if(type==='periodic'){const lastKm=parseInt(document.getElementById('reminderLastKm').value)||0;const interval=parseInt(document.getElementById('reminderInterval').value);if(!interval||interval<=0){toast('دوره تعویض الزامی است','error');return}reminder.lastKm=lastKm;reminder.interval=interval}else{const fixedKm=parseInt(document.getElementById('reminderFixedKm').value);if(!fixedKm){toast('کیلومتر سررسید الزامی است','error');return}reminder.fixedKm=fixedKm}await dbPut('reminders',reminder);state.reminders.push(reminder)}closeModal('reminderModal');toast(editId?'یادآور ویرایش شد':'یادآور اضافه شد','success');renderAll()}
+async function deleteService(id){if(!confirm('این سابقه حذف شود؟'))return;await dbDelete('services',id);state.services=state.services.filter(s=>s.id!==id);toast('سابقه حذف شد','success');renderAll()}
+async function deleteReminder(id){if(!confirm('این یادآور حذف شود؟'))return;await dbDelete('reminders',id);state.reminders=state.reminders.filter(r=>r.id!==id);toast('یادآور حذف شد','success');renderAll()}
+function getReminderStatus(r){let nextKm,remaining;if(r.type==='periodic'){nextKm=(r.lastKm||0)+r.interval;remaining=nextKm-state.currentKm}else{nextKm=r.fixedKm;remaining=nextKm-state.currentKm}if(remaining<0){return{status:'danger',label:'عقب افتاده',remaining,nextKm,percent:100}}else if(remaining<=r.warnDistance){return{status:'warning',label:'نزدیک به سررسید',remaining,nextKm,percent:Math.min(100,((r.type==='periodic'?r.interval:(r.fixedKm-(r.lastKm||0)))-remaining)/(r.type==='periodic'?r.interval:(r.fixedKm-(r.lastKm||0)))*100)}}else{const total=r.type==='periodic'?r.interval:(r.fixedKm-(r.lastKm||0));const done=total-remaining;return{status:'success',label:'مناسب',remaining,nextKm,percent:Math.max(0,(done/total)*100)}}}
+function renderHeader(){document.getElementById('headerCarName').textContent=state.carName;document.getElementById('headerKm').textContent=formatNum(state.currentKm)}
+function renderStats(){const totalServices=state.services.length;const totalCost=state.services.reduce((s,x)=>s+(x.cost||0),0);let warnings=0,dangers=0;state.reminders.forEach(r=>{const st=getReminderStatus(r).status;if(st==='warning')warnings++;if(st==='danger')dangers++});document.getElementById('statServices').textContent=toFa(totalServices);document.getElementById('statCost').textContent=formatMoney(totalCost);document.getElementById('statWarning').textContent=toFa(warnings);document.getElementById('statDanger').textContent=toFa(dangers)}
+function renderReminderCard(r,showActions=true){const st=getReminderStatus(r);const remainingText=st.remaining>=0?`${formatNum(st.remaining)} کیلومتر مانده`:`${formatNum(Math.abs(st.remaining))} کیلومتر عقب`;return`<div class="reminder-card ${st.status}"><div class="reminder-title">${r.title}</div><div class="reminder-info"><span>سررسید: ${formatNum(st.nextKm)} km</span><span>${remainingText}</span></div><div class="reminder-progress"><div class="reminder-progress-bar" style="width:${st.percent}%"></div></div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px"><span class="reminder-status status-${st.status}">${st.label}</span>${showActions?`<div style="display:flex;gap:8px"><button class="section-action" onclick="openReminderModal('${r.id}')">ویرایش</button><button class="section-action" style="color:var(--danger)" onclick="deleteReminder('${r.id}')">حذف</button></div>`:''}</div></div>`}
+function renderServiceCard(s,showActions=true){return`<div class="service-record"><div class="service-record-header"><span class="service-category">${s.category}</span><span class="service-date">${formatJalaliDate(s.date)} • ${formatNum(s.km)} km</span></div><div class="service-desc">${s.desc}</div>${s.mechanic?`<div style="font-size:12px;color:var(--text-muted);margin-bottom:4px">🔧 ${s.mechanic}</div>`:''}<div class="service-meta"><span>${s.note||''}</span><span class="service-cost">${s.cost?formatMoney(s.cost)+' تومان':'—'}</span></div>${showActions?`<div class="service-actions"><button class="btn-edit" onclick="openServiceModal('${s.id}')">ویرایش</button><button class="btn-delete" onclick="deleteService('${s.id}')">حذف</button></div>`:''}</div>`}
+function renderDashboard(){const sorted=[...state.reminders].sort((a,b)=>{const order={danger:0,warning:1,success:2};return order[getReminderStatus(a).status]-order[getReminderStatus(b).status]});const urgent=sorted.filter(r=>['danger','warning'].includes(getReminderStatus(r).status)).slice(0,3);const dashRem=document.getElementById('dashboardReminders');if(urgent.length===0){dashRem.innerHTML=`<div class="empty-state"><div class="empty-state-icon">✅</div><div class="empty-state-title">همه چیز مرتب است</div><div class="empty-state-desc">هیچ هشداری وجود ندارد</div></div>`}else{dashRem.innerHTML=urgent.map(r=>renderReminderCard(r,false)).join('')}const lastServices=state.services.slice(0,3);const dashServ=document.getElementById('dashboardServices');if(lastServices.length===0){dashServ.innerHTML=`<div class="empty-state"><div class="empty-state-icon">📋</div><div class="empty-state-title">هنوز سابقه‌ای ثبت نشده</div><div class="empty-state-desc">با دکمه + اولین سرویس را ثبت کنید</div></div>`}else{dashServ.innerHTML=lastServices.map(s=>renderServiceCard(s,false)).join('')}}
+function renderHistory(){const categories=['همه',...new Set(state.services.map(s=>s.category))];const filters=document.getElementById('historyFilters');filters.innerHTML=categories.map(c=>{const val=c==='همه'?'all':c;return`<button class="chip ${state.historyFilter===val?'active':''}" onclick="setHistoryFilter('${val}')">${c}</button>`}).join('');const filtered=state.historyFilter==='all'?state.services:state.services.filter(s=>s.category===state.historyFilter);const list=document.getElementById('historyList');if(filtered.length===0){list.innerHTML=`<div class="empty-state"><div class="empty-state-icon">📋</div><div class="empty-state-title">سابقه‌ای یافت نشد</div></div>`}else{list.innerHTML=filtered.map(s=>renderServiceCard(s)).join('')}}
+function setHistoryFilter(f){state.historyFilter=f;renderHistory()}
+function renderReminders(){const list=document.getElementById('remindersList');if(state.reminders.length===0){list.innerHTML=`<div class="empty-state"><div class="empty-state-icon">🔔</div><div class="empty-state-title">یادآوری تعریف نشده</div><div class="empty-state-desc">با دکمه + اولین یادآور را بسازید</div></div>`}else{list.innerHTML=state.reminders.map(r=>renderReminderCard(r)).join('')}}
+function renderAll(){renderHeader();renderStats();renderDashboard();renderHistory();renderReminders()}
+async function saveCarInfo(){state.carName=document.getElementById('carName').value.trim()||'خودروی من';state.carPlate=document.getElementById('carPlate').value.trim();await dbSetSetting('carName',state.carName);await dbSetSetting('carPlate',state.carPlate);renderHeader();toast('مشخصات ذخیره شد','success')}
+async function loadCarInfo(){state.carName=(await dbGetSetting('carName'))||'خودروی من';state.carPlate=(await dbGetSetting('carPlate'))||'';document.getElementById('carName').value=state.carName;document.getElementById('carPlate').value=state.carPlate}
+async function exportJSON(){const data={version:'2.1',exportedAt:new Date().toISOString(),currentKm:state.currentKm,carName:state.carName,carPlate:state.carPlate,services:state.services,reminders:state.reminders};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`karno-backup-${todayJalali().replace(/\//g,'-')}.json`;if(navigator.share&&navigator.canShare({files:[new File([blob],'backup.json')]})){try{await navigator.share({files:[new File([blob],'karno-backup.json')],title:'پشتیبان کارنو'});toast('فایل ارسال شد','success');return}catch(e){}}a.click();URL.revokeObjectURL(url);toast('فایل پشتیبان دانلود شد','success')}
+async function importJSON(event){const file=event.target.files[0];if(!file)return;try{const text=await file.text();const data=JSON.parse(text);if(!data.services||!data.reminders)throw new Error('فایل نامعتبر');if(!confirm('این عملیات اطلاعات فعلی را با داده‌های فایل جایگزین می‌کند. ادامه می‌دهید؟'))return;await dbClear('services');await dbClear('reminders');for(const s of data.services)await dbPut('services',s);for(const r of data.reminders)await dbPut('reminders',r);state.services=data.services;state.reminders=data.reminders;state.currentKm=data.currentKm||0;state.carName=data.carName||'خودروی من';state.carPlate=data.carPlate||'';await dbSetSetting('currentKm',state.currentKm);await dbSetSetting('carName',state.carName);await dbSetSetting('carPlate',state.carPlate);await loadCarInfo();renderAll();toast('پشتیبان با موفقیت بازیابی شد','success')}catch(e){toast('خطا در خواندن فایل: '+e.message,'error')}event.target.value=''}
+async function exportCSV(){if(state.services.length===0){toast('سابقه‌ای برای خروجی وجود ندارد','warning');return}const headers=['تاریخ','کیلومتر','دسته‌بندی','شرح','هزینه','تعمیرگاه','یادداشت'];const rows=state.services.map(s=>[s.date,s.km,s.category,s.desc,s.cost||0,s.mechanic||'',s.note||'']);const csv='\uFEFF'+[headers,...rows].map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`karno-services-${todayJalali().replace(/\//g,'-')}.csv`;if(navigator.share&&navigator.canShare({files:[new File([blob],'services.csv')]})){try{await navigator.share({files:[new File([blob],'karno-services.csv')],title:'سوابق کارنو'});return}catch(e){}}a.click();URL.revokeObjectURL(url);toast('فایل CSV دانلود شد','success')}
+async function loadSampleData(){if(!confirm('سرویس‌های نمونه بارگذاری شوند؟'))return;const samples=[{id:uid(),category:'روغن و فیلتر',km:Math.max(0,state.currentKm-4500),date:'1403-06-15',desc:'تعویض روغن موتور بهرام 10W-40 + فیلتر روغن و هوا',cost:1200000,mechanic:'تعویض روغنی امین',note:'',createdAt:Date.now()-1000000},{id:uid(),category:'سیستم ترمز',km:Math.max(0,state.currentKm-12000),date:'1403-03-10',desc:'تعویض لنت جلو برند گلد',cost:850000,mechanic:'مکانیکی رضایی',note:'',createdAt:Date.now()-2000000},{id:uid(),category:'لاستیک',km:Math.max(0,state.currentKm-25000),date:'1402-12-01',desc:'بالانس و چرخش لاستیک‌ها',cost:200000,mechanic:'آپاراتی مرکزی',note:'',createdAt:Date.now()-3000000}];for(const s of samples)await dbPut('services',s);state.services=[...samples,...state.services].sort((a,b)=>b.createdAt-a.createdAt);const sampleReminders=[{id:uid(),title:'تعویض روغن موتور',type:'periodic',interval:5000,lastKm:Math.max(0,state.currentKm-4500),warnDistance:1000,createdAt:Date.now()},{id:uid(),title:'تعویض لنت ترمز',type:'periodic',interval:20000,lastKm:Math.max(0,state.currentKm-12000),warnDistance:2000,createdAt:Date.now()},{id:uid(),title:'تعویض تسمه تایم',type:'periodic',interval:60000,lastKm:Math.max(0,state.currentKm-45000),warnDistance:5000,createdAt:Date.now()}];for(const r of sampleReminders)await dbPut('reminders',r);state.reminders=[...sampleReminders,...state.reminders];renderAll();toast('داده‌های نمونه بارگذاری شد','success')}
+async function resetAll(){if(!confirm('️ تمام اطلاعات حذف خواهد شد. آیا مطمئنید؟'))return;if(!confirm('این عمل غیرقابل بازگشت است! ادامه می‌دهید؟'))return;await dbClear('services');await dbClear('reminders');await dbClear('settings');state.services=[];state.reminders=[];state.currentKm=0;state.carName='خودروی من';state.carPlate='';await loadCarInfo();renderAll();toast('برنامه بازنشانی شد','success')}
+async function shareApp(){const shareData={title:'کارنو - دستیار نگهداری خودرو',text:'برنامه کارنو را نصب کنید - دستیار هوشمند نگهداری خودرو',url:window.location.href};if(navigator.share){try{await navigator.share(shareData)}catch(e){}}else{navigator.clipboard.writeText(window.location.href);toast('لینک کپی شد','success')}}
+let deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',(e)=>{e.preventDefault();deferredPrompt=e;if(!localStorage.getItem('installDismissed')){document.getElementById('installBanner').classList.add('show')}});
+async function installApp(){if(!deferredPrompt){toast('برای نصب: از منوی مرورگر گزینه "افزودن به صفحه اصلی" را بزنید','info');return}deferredPrompt.prompt();const{outcome}=await deferredPrompt.userChoice;if(outcome==='accepted')toast('کارنو نصب شد! 🎉','success');deferredPrompt=null;document.getElementById('installBanner').classList.remove('show')}
+function dismissInstall(){document.getElementById('installBanner').classList.remove('show');localStorage.setItem('installDismissed','1')}
+window.addEventListener('appinstalled',()=>{document.getElementById('installBanner').classList.remove('show');toast('کارنو با موفقیت نصب شد','success')});
+if('serviceWorker' in navigator){window.addEventListener('load',async()=>{try{const registration=await navigator.serviceWorker.register('./sw.js',{scope:'./'});console.log('[SW] ثبت شد با scope:',registration.scope);registration.addEventListener('updatefound',()=>{const newWorker=registration.installing;newWorker.addEventListener('statechange',()=>{if(newWorker.state==='installed'&&navigator.serviceWorker.controller){toast('نسخه جدید برنامه آماده است. لطفاً صفحه را رفرش کنید.','info')}})})}catch(e){console.warn('[SW] خطا:',e)}})}
+async function init(){try{await openDB();await loadTheme();await loadCarInfo();state.currentKm=(await dbGetSetting('currentKm'))||0;state.services=(await dbGetAll('services')).sort((a,b)=>b.createdAt-a.createdAt);state.reminders=await dbGetAll('reminders');renderAll();document.getElementById('themeToggle').addEventListener('click',toggleTheme);document.getElementById('shareBtn').addEventListener('click',shareApp);document.getElementById('installBtn').addEventListener('click',installApp);document.querySelectorAll('.modal-overlay').forEach(overlay=>{overlay.addEventListener('click',(e)=>{if(e.target===overlay)closeModal(overlay.id)})});const params=new URLSearchParams(window.location.search);const action=params.get('action');if(action==='new-service')openServiceModal();if(action==='update-km')openKmModal();console.log('✅ کارنو آماده است')}catch(e){console.error('خطا در راه‌اندازی:',e);toast('خطا در بارگذاری برنامه','error')}}
+init();
+</script>
+</body>
+</html>
